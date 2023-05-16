@@ -1,6 +1,6 @@
 export default function Contact() {
   return (
-    <main className="">
+    <main className='bg-[#EDEFF3]'>
       Login
     </main>
   )
