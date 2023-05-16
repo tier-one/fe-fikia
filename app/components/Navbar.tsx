@@ -32,7 +32,7 @@ export default function Navbar() {
   }
 
   return (
-    <div className='bg-white py-5 h-15 max-h-full drop-shadow-lg w-full flex justify-between px-5 lg:px-24'>
+    <div className='bg-white fixed py-5 h-15 max-h-full drop-shadow-lg w-full flex justify-between px-5 lg:px-24'>
       <div>
         <Image 
           src='/fikia_logo.svg' 
@@ -47,9 +47,9 @@ export default function Navbar() {
       </div>
       <div className='lg:hidden'>
         <div onClick={handleHamburgerBtn}>
-          <div className={`h-1 w-10 bg-[#002674] ${hamburgerOpen ? 'mt-3 rotate-45 transition duration-150 ease-in-out' : 'transition duration-150 ease-in-out'}`}></div>
+          <div className={`h-1 w-10 bg-[#002674] ${hamburgerOpen ? 'absolute rotate-45 transition duration-150 ease-in-out' : 'transition duration-150 ease-in-out'}`}></div>
           <div className={`h-1 w-10 bg-[#002674] mt-2 ${hamburgerOpen ? 'hidden' : ''}`}></div>
-          <div className={`h-1 w-10 bg-[#002674] mt-2 ${hamburgerOpen ? '-mt-1 -rotate-45 transition duration-150 ease-in-out' : 'transition duration-150 ease-in-out'}`}></div>
+          <div className={`h-1 w-10 bg-[#002674] mt-2 ${hamburgerOpen ? '-mt-[0.2rem] -rotate-45 transition duration-150 ease-in-out' : 'transition duration-150 ease-in-out'}`}></div>
         </div>
         <div className={`flex flex-col pl-3 absolute bg-white border text-2xl drop-shadow left-0 w-full mt-6 ${hamburgerOpen ? '': 'hidden'}`}>
           <Link href='/' className='mt-4' onClick={handleHamburgerBtn}>Home</Link>
@@ -63,7 +63,7 @@ export default function Navbar() {
               <Link href='/' className='my-1'>Fikia Plus</Link>
             </div>
           </div>
-          <Link href='/contact' className='mt-4' onClick={handleHamburgerBtn}>Contact Us</Link>
+          <Link href='/contact' className='mt-4 mb-2' onClick={handleHamburgerBtn}>Contact Us</Link>
         </div>
       </div>
     </div>
