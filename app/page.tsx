@@ -90,7 +90,7 @@ export default function Home() {
             <div className='p-6 xl:w-1/2'>
               <Image src='/fund-manager.svg' width={50} height={10} alt='individual logo' />
               <p className='font-bold text-2xl py-4'>Fund Manager</p>
-              <p>Manage money from retail investors in mutual funds, ETFs, or hedge funds. They make investment decisions to achieve returns that meet or exceed the fund's benchmark index or objective. </p>
+              <p>Manage money from retail investors in mutual funds, ETFs, or hedge funds. They make investment decisions to achieve returns that meet or exceed the fund&apos;s benchmark index or objective. </p>
               <div className='py-4'>
                 <div className='flex items-center py-1'>
                   <Image src='/check.svg' width={30} height={10} alt='check' />
