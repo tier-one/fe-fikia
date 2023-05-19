@@ -1,6 +1,7 @@
 import Navbar from './components/Navbar'
 import './globals.css'
 import { Inter, Jost } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/react';
 
 const inter = Inter({ subsets: ['latin'] })
 const jost = Jost({ subsets: ['latin'] })
@@ -17,6 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <Analytics />
       <body className={jost.className}>
         <Navbar />
         {children}
