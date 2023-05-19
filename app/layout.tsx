@@ -1,8 +1,9 @@
 import Navbar from './components/Navbar'
 import './globals.css'
-import { Inter } from 'next/font/google'
+import { Inter, Jost } from 'next/font/google'
 
 const inter = Inter({ subsets: ['latin'] })
+const jost = Jost({ subsets: ['latin'] })
 
 export const metadata = {
   title: 'Fikia',
@@ -16,7 +17,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={jost.className}>
         <Navbar />
         {children}
       </body>
