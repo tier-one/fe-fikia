@@ -2,7 +2,7 @@
 
 export default function Contact() {
   return (
-    <main className="">
+    <main className='pt-16'>
       Contact
     </main>
   )
