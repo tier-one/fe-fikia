@@ -1,26 +1,10 @@
 'use client'
 import Image from "next/image";
-import InputField from "./components/InputField";
-import { useState } from "react";
-import Button from "./components/Button";
 import Faq from "./components/Faq";
 import Footer from "./components/Footer";
+import EmailRequest from "./components/EmailRequest";
 
 export default function Home() {
-  const [email, setEmail] = useState('')
-
-  const handleEmail = (email: string) => {
-    setEmail(email)
-  }
-
-  const inputFieldStylingProps = {
-    container: {
-      className: 'flex flex-col space w-full'
-    },
-    input: {
-      className: 'py-4 px-4 rounded-full mt-2 bg-slate-100 border border-gray-300 placeholder:text-gray-600'
-    },
-  }
 
   return (
     <main className='bg-[#EDEFF3] min-h-screen text-[#475569]'>
@@ -32,26 +16,7 @@ export default function Home() {
           <div className='mx-4 py-3 lg:order-1 lg:w-1/2 lg:my-16 xl:my-32'>
             <h1 className='text-4xl font-semibold xl:text-6xl'>Track your investments, grow your wealth</h1>
             <p className='py-3 xl:text-xl xl:w-2/3'>Join our extensive waitlist today to spark connection and get notified when we launch 🚀</p>
-            <div className='relative flex items-center xl:w-2/3'>
-              <div className=' w-full'>
-                <InputField
-                  value={email}
-                  placeholder='Your email'
-                  required={false}
-                  type='text'
-                  className='text-xs'
-                  label=''
-                  onChange={handleEmail}
-                  {...inputFieldStylingProps}
-                />
-              </div>
-              <div className='absolute right-0'>
-                <Button
-                  value='Early Access'
-                  styling='bg-[#002674] text-white py-2 px-4 mt-2 mr-1 rounded-full'
-                />
-              </div>
-            </div>
+            <EmailRequest value='Early Access' />
             <div className='my-6'>
               <p>Trusted by</p>
               <div className='flex py-4 justify-normal'>
@@ -108,7 +73,7 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <section className='mx-4 lg:mx-[10rem] xl:mx-[28rem]'>
+        <section className='mx-4 lg:mx-[10rem] xl:mx-[15rem]'>
           <Faq />
           <Footer />
         </section>
