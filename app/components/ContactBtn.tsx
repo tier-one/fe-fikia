@@ -1,17 +1,21 @@
 'use client'
 
 
-const ContactBtn=({text})=>{
+interface ButtonProps {
+    text?: string
+}
 
-return (
-    <div className='w-full md:w-80 flex flex-col mt-4'>
+const ContactBtn = ({ text }: ButtonProps) => {
 
-        <button className="bg-blue-900  text-white font-bold py-2 px-4 rounded-lg">
-            {text}
-        </button>
-    </div>
+    return (
+        <div className='flex flex-col mb-4'>
 
-)
+            <button className="bg-blue-900  text-white font-bold py-2 px-4 rounded-lg">
+                {text}
+            </button>
+        </div>
+
+    )
 }
 
 export default ContactBtn
