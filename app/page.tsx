@@ -24,7 +24,7 @@ export default function Home() {
 
   return (
     <main className='bg-[#EDEFF3] min-h-screen text-[#475569]'>
-      <div className='pt-16'>
+     <div className='pt-16'>
         <section className='mt-4 lg:flex lg:justify-center lg:mx-32 xl:mx-48'>
           <div className='flex justify-center mx-3 lg:order-2 lg:w-1/2'>
             <Image src='/banner.svg' alt='fikia banner' width={600} height={20} />
