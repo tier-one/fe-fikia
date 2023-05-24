@@ -58,9 +58,9 @@ export default function Navbar() {
               Our Products
               <Image className='mx-2' src='/arrow.svg' alt="arrow" width={20} height={10} />
             </div>
-            <div className={`text-xl ml-3 flex flex-col ${dropDownOpenStatus ? 'daf' : 'hidden'}`}>
-              <Link href='/' className='my-1'>Fikia</Link>
-              <Link href='/' className='my-1'>Fikia Plus</Link>
+            <div className={`text-xl ml-3 flex flex-col ${dropDownOpenStatus ? '' : 'hidden'}`}>
+              <Link href='/investor' onClick={handleHamburgerBtn} className='my-1'>Fikia</Link>
+              <Link href='/fund-manager' onClick={handleHamburgerBtn} className='my-1'>Fikia Plus</Link>
             </div>
           </div>
           <Link href='/contact' className='mt-4 mb-2' onClick={handleHamburgerBtn}>Contact Us</Link>
