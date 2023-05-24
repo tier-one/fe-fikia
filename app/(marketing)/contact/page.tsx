@@ -29,7 +29,7 @@ export default function Contact() {
         <section className="lg:w-1/2 mx-6  mb-16">
         
             <h1 className="text-2xl font-semibold xl:text-4xl">Get in touch with us</h1>
-            <p className="py-3 ">You can reach us anytime via contact@fikio.io </p>
+            <p className="py-3 ">You can reach us anytime via contact@fikia.io </p>
             <form className="w-full">
               <InputField
                 value={name}
