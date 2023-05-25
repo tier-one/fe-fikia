@@ -14,7 +14,7 @@ export default function FundManager() {
       <Banner />
       <div className="absolute pt-16 z-20 text-white w-full ">
         <div className="px-5 py-10 lg:px-28 lg:py-24">
-          <p className="text-3xl font-bold">For a fund Manager::</p>
+          <p className="text-3xl font-bold">For a fund Manager:</p>
           <p className="py-4">
             Join our extensive waitlist today to spark connection and get
             notified when we launch 🚀
