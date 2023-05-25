@@ -10,7 +10,7 @@ import Banner from "@/app/components/Banner";
 
 export default function FundManager() {
   return (
-    <div className="bg-[#EDEFF3] relative">
+    <div className="bg-[#EDEFF3] relative  ">
       <Banner />
       <div className="absolute pt-16 z-20 text-white w-full ">
         <div className="px-5 py-10 lg:px-28 lg:py-24">
@@ -27,7 +27,7 @@ export default function FundManager() {
       <div className="flex flex-col text-black px-8 pt-96 lg:flex lg:justify-center lg:mx-32 xl:mx-48">
         <div className="lg:flex lg:justify-center lg:my-16 ">
           <div className="py-7 lg:w-1/2 ">
-            <h1 className="font-medium text-3xl lg:pb-6">
+            <h1 className="font-medium text-3xl lg:pb-6 text-[#475569]">
               Track your investments grow your wealth
             </h1>
             <div className="flex items-center py-2">
@@ -35,8 +35,8 @@ export default function FundManager() {
                 <Image src="/click.svg" alt="click" width={20} height={10} />
               </div>
               <div className="w-5/6">
-                <h2 className="font-bold py-2">Successful products</h2>
-                <p className="text-normal">
+                <h2 className="font-bold py-2 text-[#475569]">Successful products</h2>
+                <p className="text-normal text-[#475569]">
                   Join our extensive waitlist today to spark connection and
                   get notified when we launch 🚀
                 </p>
@@ -47,7 +47,7 @@ export default function FundManager() {
                 <Image src="/power.svg" alt="power" width={20} height={10} />
               </div>
               <div className="w-5/6">
-                <h2 className="font-bold py-2">Successful products</h2>
+                <h2 className="font-bold py-2 text-[#475569]">Successful products</h2>
                 <p className="text-normal">
                   Join our extensive waitlist today to spark connection and
                   get notified when we launch 🚀
@@ -64,7 +64,7 @@ export default function FundManager() {
                 />
               </div>
               <div className="w-5/6">
-                <h2 className="font-bold py-2">Successful products</h2>
+                <h2 className="font-bold py-2 text-[#475569]">Successful products</h2>
                 <p className="text-normal">
                   Join our extensive waitlist today to spark connection and
                   get notified when we launch 🚀
@@ -83,10 +83,10 @@ export default function FundManager() {
 
         <div className="pt-[30rem] lg:pt-0 ">
 
-          <div className="lg:flex  lg:justify-center lg:flex-row-reverse">
+          <div className="lg:flex  lg:justify-center lg:flex-row-reverse ">
 
             <div className="py-7 lg:w-1/2">
-              <h1 className="font-medium text-3xl">
+              <h1 className="font-medium text-3xl text-[#475569] ">
                 Track your investments grow your wealth
               </h1>
               <div className="flex items-center py-2">
@@ -94,8 +94,8 @@ export default function FundManager() {
                   <Image src="/click.svg" alt="click" width={20} height={10} />
                 </div>
                 <div className="w-5/6">
-                  <h2 className="font-bold py-2">Successful products</h2>
-                  <p className="text-normal">
+                  <h2 className="font-bold py-2 text-[#475569]">Successful products</h2>
+                  <p className="text-normal text-[#475569]">
                     Join our extensive waitlist today to spark connection and
                     get notified when we launch 🚀
                   </p>
@@ -106,8 +106,8 @@ export default function FundManager() {
                   <Image src="/power.svg" alt="power" width={20} height={10} />
                 </div>
                 <div className="w-5/6">
-                  <h2 className="font-bold py-2">Successful products</h2>
-                  <p className="text-normal">
+                  <h2 className="font-bold py-2 text-[#475569]">Successful products</h2>
+                  <p className="text-normal text-[#475569]">
                     Join our extensive waitlist today to spark connection and
                     get notified when we launch 🚀
                   </p>
@@ -123,8 +123,8 @@ export default function FundManager() {
                   />
                 </div>
                 <div className="w-5/6">
-                  <h2 className="font-bold py-2">Successful products</h2>
-                  <p className="text-normal">
+                  <h2 className="font-bold py-2 text-[#475569]">Successful products</h2>
+                  <p className="text-normal text-[#475569]">
                     Join our extensive waitlist today to spark connection and
                     get notified when we launch 🚀
                   </p>

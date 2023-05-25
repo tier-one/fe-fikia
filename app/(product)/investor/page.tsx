@@ -26,7 +26,7 @@ export default function Investor() {
       <div className="flex flex-col text-black px-8 pt-96 lg:flex lg:justify-center lg:mx-32 xl:mx-48">
         <div className="lg:flex lg:justify-center lg:my-16 ">
           <div className="py-7 lg:w-1/2 ">
-            <h1 className="font-medium text-3xl lg:pb-6">
+            <h1 className="font-medium text-3xl  text-[#475569] lg:pb-6">
               Track your investments grow your wealth
             </h1>
             <div className="flex items-center py-2">
@@ -34,8 +34,8 @@ export default function Investor() {
                 <Image src="/click.svg" alt="click" width={20} height={10} />
               </div>
               <div className="w-5/6">
-                <h2 className="font-bold py-2">Successful products</h2>
-                <p className="text-normal">
+                <h2 className="font-bold  text-[#475569] py-2">Successful products</h2>
+                <p className="text-normal  text-[#475569]">
                   Join our extensive waitlist today to spark connection and
                   get notified when we launch 🚀
                 </p>
@@ -46,8 +46,8 @@ export default function Investor() {
                 <Image src="/power.svg" alt="power" width={20} height={10} />
               </div>
               <div className="w-5/6">
-                <h2 className="font-bold py-2">Successful products</h2>
-                <p className="text-normal">
+                <h2 className="font-bold py-2  text-[#475569]">Successful products</h2>
+                <p className="text-normal  text-[#475569]">
                   Join our extensive waitlist today to spark connection and
                   get notified when we launch 🚀
                 </p>
@@ -63,8 +63,8 @@ export default function Investor() {
                 />
               </div>
               <div className="w-5/6">
-                <h2 className="font-bold py-2">Successful products</h2>
-                <p className="text-normal">
+                <h2 className="font-bold  text-[#475569] py-2">Successful products</h2>
+                <p className="text-normal  text-[#475569]">
                   Join our extensive waitlist today to spark connection and
                   get notified when we launch 🚀
                 </p>
@@ -85,7 +85,7 @@ export default function Investor() {
           <div className="lg:flex  lg:justify-center lg:flex-row-reverse">
 
             <div className="py-7 lg:w-1/2">
-              <h1 className="font-medium text-3xl">
+              <h1 className="font-medium  text-[#475569] text-3xl">
                 Track your investments grow your wealth
               </h1>
               <div className="flex items-center py-2">
@@ -93,8 +93,8 @@ export default function Investor() {
                   <Image src="/click.svg" alt="click" width={20} height={10} />
                 </div>
                 <div className="w-5/6">
-                  <h2 className="font-bold py-2">Successful products</h2>
-                  <p className="text-normal">
+                  <h2 className="font-bold py-2  text-[#475569]">Successful products</h2>
+                  <p className="text-normal  text-[#475569]">
                     Join our extensive waitlist today to spark connection and
                     get notified when we launch 🚀
                   </p>
@@ -105,8 +105,8 @@ export default function Investor() {
                   <Image src="/power.svg" alt="power" width={20} height={10} />
                 </div>
                 <div className="w-5/6">
-                  <h2 className="font-bold py-2">Successful products</h2>
-                  <p className="text-normal">
+                  <h2 className="font-bold py-2  text-[#475569]">Successful products</h2>
+                  <p className="text-normal  text-[#475569]">
                     Join our extensive waitlist today to spark connection and
                     get notified when we launch 🚀
                   </p>
@@ -122,8 +122,8 @@ export default function Investor() {
                   />
                 </div>
                 <div className="w-5/6">
-                  <h2 className="font-bold py-2">Successful products</h2>
-                  <p className="text-normal">
+                  <h2 className="font-bold py-2  text-[#475569]">Successful products</h2>
+                  <p className="text-normal  text-[#475569]">
                     Join our extensive waitlist today to spark connection and
                     get notified when we launch 🚀
                   </p>
