@@ -1,7 +1,6 @@
 "use client";
 import Image from "next/image";
 import React from "react";
-import indivInvestor from "../../../public/indiv-investor.jpg";
 import EmailRequest from "@/app/components/EmailRequest";
 import PictureCard from "@/app/components/PictureCard";
 import Faq from "@/app/components/Faq";
