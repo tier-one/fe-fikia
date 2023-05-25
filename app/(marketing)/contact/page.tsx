@@ -81,7 +81,7 @@ export default function Contact() {
         </section>
       </section>
 
-      <section className='mt-3 my-6  flex-col  lg:flex lg:justify-center lg:mx-32 xl:mx-48'>
+      <section className='mt-3   flex-col  lg:flex lg:justify-center lg:mx-32 xl:mx-48'>
         <Faq />
         <Footer />
       </section>

@@ -32,14 +32,14 @@ export default function EmailRequest({ value }: EmailRequestProps) {
   }
   return (
 
-    <div className='relative flex items-center xl:w-2/3'>
+    <div className='relative flex items-center xl:w-2/3 '>
       <div className=' w-full'>
         <InputField
           value={email}
           placeholder='Your email'
           required={false}
           type='text'
-          className='text-xs'
+          className='text-xs text-[#475569] '
           label=''
           onChange={handleEmail}
           {...inputFieldStylingProps}
