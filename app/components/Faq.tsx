@@ -11,11 +11,11 @@ const frequentlyAskedQuestions: FaqType[] = [
     answer: 'Invest personal funds in financial instruments based on their investment goals, risk tolerance, and time horizon, with the aim of long-term wealth growth. '
   },
   {
-    question: 'What types of funds can I track?',
+    question: 'What types of funds can I track on the platform?',
     answer: 'Invest personal funds in financial instruments based on their investment goals, risk tolerance, and time horizon, with the aim of long-term wealth growth. '
   },
   {
-    question: 'Can I use the platform to invest ',
+    question: 'Can I use the platform to invest directly in funds, or do I need to go through a broker? ',
     answer: 'Invest personal funds in financial instruments based on their investment goals, risk tolerance, and time horizon, with the aim of long-term wealth growth. '
   },
   {
@@ -27,7 +27,7 @@ const frequentlyAskedQuestions: FaqType[] = [
 
 export default function Faq() {
   return (
-    <div>
+    <div className="px-4">
       <h1 className='text-3xl font-semibold'>More about Fikia</h1>
       <div className='xl:py-4'>
         {
