@@ -27,12 +27,12 @@ const frequentlyAskedQuestions: FaqType[] = [
 
 export default function Faq() {
   return (
-    <div className="px-4">
-      <h1 className='text-3xl font-semibold'>More about Fikia</h1>
+    <div>
+      <h1 className='text-3xl text-[#475569] font-semibold'>More about Fikia</h1>
       <div className='xl:py-4'>
         {
           frequentlyAskedQuestions.map((faq: FaqType, index: number) => (
-            <div key={index}>
+            <div key={index} className='text-[#64748A]'>
               <Tab {...faq} />
             </div>
           ))

@@ -3,7 +3,6 @@ import './globals.css'
 import { Inter, Jost } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/react';
 
-const inter = Inter({ subsets: ['latin'] })
 const jost = Jost({ subsets: ['latin'] })
 
 export const metadata = {
