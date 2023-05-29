@@ -8,19 +8,23 @@ export type FaqType = {
 const frequentlyAskedQuestions: FaqType[] = [
   {
     question: 'What is Fikia?',
-    answer: 'Invest personal funds in financial instruments based on their investment goals, risk tolerance, and time horizon, with the aim of long-term wealth growth. '
+    answer: 'Fikia is a powerful platform designed specifically for retail investors to easily build and track their investment portfolios. It empowers individuals to take control of their financial future and make informed investment decisions.'
   },
   {
-    question: 'What types of funds can I track on the platform?',
-    answer: 'Invest personal funds in financial instruments based on their investment goals, risk tolerance, and time horizon, with the aim of long-term wealth growth. '
+    question: 'How does Fikia work? ',
+    answer: 'Fikia provides a user-friendly interface that allows you to seamlessly create and manage your investment portfolio. You can choose from a wide range of investment options, including Exchange Traded Funds (ETFs), mutual funds, and more. Fikia provides personalized recommendations based on your investment goals, risk tolerance, and preferences to help you make well-informed decisions.'
   },
   {
-    question: 'Can I use the platform to invest directly in funds, or do I need to go through a broker? ',
-    answer: 'Invest personal funds in financial instruments based on their investment goals, risk tolerance, and time horizon, with the aim of long-term wealth growth. '
+    question: 'Is Fikia suitable for beginners?',
+    answer: 'Absolutely! Fikia is designed to cater to investors of all experience levels, including beginners. We provide educational resources, tutorials, and a user-friendly interface to ensure that even those new to investing can easily navigate the platform and make informed decisions.'
   },
   {
-    question: 'Is it free to use this platform?',
-    answer: 'Invest personal funds in financial instruments based on their investment goals, risk tolerance, and time horizon, with the aim of long-term wealth growth. '
+    question: 'What is Fikia Plus?',
+    answer: 'Fikia Plus is a comprehensive platform specifically designed for fund managers to automate and streamline their fund management processes. It offers advanced tools and features to enhance efficiency, improve decision-making, and optimize portfolio performance.'
+  },
+  {
+    question: 'Is the platform free to use?',
+    answer: 'We have both free and premium subscription options. Our premium plans provide additional features and benefits, such as advanced portfolio analytics and personalized support.'
   },
 ]
 
