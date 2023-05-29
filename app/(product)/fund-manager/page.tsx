@@ -48,7 +48,7 @@ export default function FundManager() {
               <div className="w-5/6">
                 <h2 className="font-bold py-2 text-[#475569]">Use our cutting edge tools</h2>
                 <p className="text-normal">
-                  Fikia's cutting-edge platform empowers fund managers with automated workflows, saving time and effort, to focus on delivering exceptional results for clients.
+                  Fikia&apos;s cutting-edge platform empowers fund managers with automated workflows, saving time and effort, to focus on delivering exceptional results for clients.
                 </p>
               </div>
             </div>
@@ -107,7 +107,7 @@ export default function FundManager() {
                 <div className="w-5/6">
                   <h2 className="font-bold py-2 text-[#475569]">Streamlined performance tracking and analysis</h2>
                   <p className="text-normal text-[#475569]">
-                    Efficiently monitor and analyze portfolio performance with Fikia's powerful tracking capabilities. 
+                    Efficiently monitor and analyze portfolio performance with Fikia&apos;s powerful tracking capabilities. 
                     Our intelligent dashboard provides a comprehensive overview of key performance indicators, including returns, risk metrics
                   </p>
                 </div>
