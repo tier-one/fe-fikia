@@ -36,30 +36,30 @@ export default function Home() {
             <div className='p-6 xl:w-1/2'>
               <Image src='/individual-investor.svg' width={50} height={10} alt='individual logo' />
               <p className='font-bold text-2xl py-4'>Individual investor</p>
-              <p>Invest personal funds in financial instruments based on their investment goals, risk tolerance, and time horizon, with the aim of long-term wealth growth. </p>
+              <p>Invest flexibly in financial instruments based on your investment goals, risk tolerance, and time horizon, and grow your wealth in the long term.</p>
               <div className='py-4'>
                 <div className='flex items-center py-1'>
                   <Image src='/check.svg' width={30} height={10} alt='check' />
-                  <p className='px-2'>Portfolio tracking and analysis</p>
+                  <p className='px-2'>Build and track your portfolio</p>
                 </div>
                 <div className='flex items-center py-1'>
                   <Image src='/check.svg' width={30} height={10} alt='check' />
-                  <p className='px-2'>Real-time market data and news</p>
+                  <p className='px-2'>Get real-time market data and information</p>
                 </div>
                 <div className='flex items-center py-1'>
                   <Image src='/check.svg' width={30} height={10} alt='check' />
-                  <p className='px-2'>Educational resources and tools for improving financial literacy.</p>
+                  <p className='px-2'>Access educational resources and tools for improving your financial literacy.</p>
                 </div>
               </div>
             </div>
             <div className='p-6 xl:w-1/2'>
               <Image src='/fund-manager.svg' width={50} height={10} alt='individual logo' />
               <p className='font-bold text-2xl py-4'>Fund Manager</p>
-              <p>Manage money from retail investors in mutual funds, ETFs, or hedge funds. They make investment decisions to achieve returns that meet or exceed the fund&apos;s benchmark index or objective. </p>
+              <p>Manage money from retail investors in mutual funds, ETFs, or hedge funds. Lower your operational costs and save time. Make better investment decisions to achieve returns that meet or exceed the fund&apos;s benchmark index. </p>
               <div className='py-4'>
                 <div className='flex items-center py-1'>
                   <Image src='/check.svg' width={30} height={10} alt='check' />
-                  <p className='px-2'>Portfolio tracking and analysis</p>
+                  <p className='px-2'>Easy portfolio tracking and analysis</p>
                 </div>
                 <div className='flex items-center py-1'>
                   <Image src='/check.svg' width={30} height={10} alt='check' />
