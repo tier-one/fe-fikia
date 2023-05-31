@@ -13,11 +13,11 @@ export default function Home() {
           <div className='flex justify-center mx-3 lg:order-2 lg:w-1/2'>
             <Image src='/banner.svg' alt='fikia banner' width={600} height={20} />
           </div>
-          <div className='mx-4 py-3 lg:order-1 lg:w-1/2 lg:my-16 xl:my-32'>
+          <div className='mx-4 py-9 lg:order-1 lg:w-1/2 lg:my-16 xl:my-32'>
             <h1 className='text-4xl font-semibold xl:text-6xl'>Track your investments, grow your wealth</h1>
-            <p className='py-3 xl:text-xl xl:w-2/3'>Join our extensive waitlist today to spark connection and get notified when we launch 🚀</p>
+            <p className='py-8 xl:text-xl xl:w-2/3'>Join our extensive waitlist today to spark connection and get notified when we launch 🚀</p>
             <EmailRequest value='Early Access' />
-            <div className='my-6'>
+            <div className='py-4'>
               <p>Trusted by</p>
               <div className='flex py-4 justify-normal'>
                 <Image src='/bkcapital.svg' width={150} height={100} alt="bk logo" className='mr-4'/>
