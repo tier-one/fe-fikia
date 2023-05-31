@@ -1,5 +1,6 @@
 'use client'
 
+import validator from "validator"
 import Button from "./Button";
 import InputField from "./InputField";
 import { useState } from "react";
@@ -19,19 +20,21 @@ export default function EmailRequest({ value }: EmailRequestProps) {
   }
 
   const handleWaitlist = async () => {
-    const response = await apiQuery('waitlist', 'POST', { email: email })
-    if (response.hasOwnProperty('email') && response.email === email) {
-      setResponseMessage("Congratulations!!! You have been added to the waitlist.")
-      setTimeout(() => {
-        setResponseMessage("")
-      }, 5000)
-    } else if (response.status === 422) {
-      setResponseMessage("Email already exist")
-      setIsError(true)
-      setTimeout(() => {
-        setResponseMessage("")
-        setIsError(false)
-      }, 5000)
+    if (validator.isEmail(email)) {
+      const response = await apiQuery('waitlist', 'POST', { email: email })
+      if (response.hasOwnProperty('email') && response.email === email) {
+        setResponseMessage("Congratulations!!! You have been added to the waitlist.")
+        setTimeout(() => {
+          setResponseMessage("")
+        }, 5000)
+      } else if (response.status === 422) {
+        setResponseMessage("Email already exist")
+        setIsError(true)
+        setTimeout(() => {
+          setResponseMessage("")
+          setIsError(false)
+        }, 5000)
+      }
     }
 
   }
@@ -49,7 +52,7 @@ export default function EmailRequest({ value }: EmailRequestProps) {
     },
   }
   return (
-    <div>
+    <div className="min-h-[6.7rem]">
       <div className='relative  flex items-center xl:w-2/3 '>
         <div className=' w-full'>
           <InputField
