@@ -26,7 +26,7 @@ export default function EmailRequest({ value }: EmailRequestProps) {
         setResponseMessage("")
       }, 5000)
     } else if (response.status === 422) {
-      setResponseMessage("Email aldready exist")
+      setResponseMessage("Email already exist")
       setIsError(true)
       setTimeout(() => {
         setResponseMessage("")
