@@ -14,7 +14,7 @@ export default function EmailRequest({ value }: EmailRequestProps) {
   const [email, setEmail] = useState('')
   const [responseMessage, setResponseMessage] = useState('')
   const [isError, setIsError] = useState(false)
-const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const handleEmail = (email: string) => {
     setEmail(email)
   }
@@ -72,9 +72,10 @@ const [isLoading, setIsLoading] = useState(false);
         <div className='absolute right-0'>
           <Button
             value={value}
-            styling='bg-[#002674] text-white py-2 px-4 mt-2 mr-1 rounded-full'
+            styling={`${!validator.isEmail(email) ? 'bg-[#002674] bg-opacity-50' : 'bg-[#002674]'} text-white py-2 px-4 mt-2 mr-1 rounded-full`}
             onClick={value === 'Early Access' ? handleWaitlist : bookDemo}
             isLoading={isLoading}
+            isDisabled={validator.isEmail(email)}
           />
         </div>
       </div>

@@ -6,6 +6,7 @@ interface ButtonProps {
   icon?: string;
   onClick?: () => void;
   isLoading?: boolean;
+  isDisabled?: boolean;
 }
 
 export default function Button({
@@ -13,10 +14,11 @@ export default function Button({
   styling,
   icon,
   onClick,
-  isLoading
+  isLoading,
+  isDisabled
 }: ButtonProps) {
   return (
-    <button className={styling} onClick={onClick} disabled={isLoading}>
+    <button className={styling} onClick={onClick} disabled={!isDisabled}>
       <div className='flex items-center'>
         {isLoading ? (
           <div className="animate-spin rounded-full h-6 w-6 border-t-2 border-b-2 border-white"></div>
