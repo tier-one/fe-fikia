@@ -14,20 +14,23 @@ export default function EmailRequest({ value }: EmailRequestProps) {
   const [email, setEmail] = useState('')
   const [responseMessage, setResponseMessage] = useState('')
   const [isError, setIsError] = useState(false)
-
+const [isLoading, setIsLoading] = useState(false);
   const handleEmail = (email: string) => {
     setEmail(email)
   }
 
   const handleWaitlist = async () => {
     if (validator.isEmail(email)) {
+      setIsLoading(true);
       const response = await apiQuery('waitlist', 'POST', { email: email })
       if (response.hasOwnProperty('email') && response.email === email) {
+        setIsLoading(false);
         setResponseMessage("Congratulations!!! You have been added to the waitlist.")
         setTimeout(() => {
           setResponseMessage("")
         }, 5000)
       } else if (response.status === 422) {
+        setIsLoading(false);
         setResponseMessage("Email already exists")
         setIsError(true)
         setTimeout(() => {
@@ -71,6 +74,7 @@ export default function EmailRequest({ value }: EmailRequestProps) {
             value={value}
             styling='bg-[#002674] text-white py-2 px-4 mt-2 mr-1 rounded-full'
             onClick={value === 'Early Access' ? handleWaitlist : bookDemo}
+            isLoading={isLoading}
           />
         </div>
       </div>

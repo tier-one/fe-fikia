@@ -1,25 +1,34 @@
 import Image from 'next/image';
 
 interface ButtonProps {
-  value?: string
-  styling?: string
-  icon?: string
-  onClick?: () => void
+  value?: string;
+  styling?: string;
+  icon?: string;
+  onClick?: () => void;
+  isLoading?: boolean;
 }
 
 export default function Button({
   value,
   styling,
   icon,
-  onClick
+  onClick,
+  isLoading
 }: ButtonProps) {
   return (
-    <button className={styling} onClick={onClick}>
-      <div className='flex'>
-        {icon ? <Image alt='icon' src={icon} width={20} height={20} /> : ''}
-        <div className='w-full'>{value}</div>
+    <button className={styling} onClick={onClick} disabled={isLoading}>
+      <div className='flex items-center'>
+        {isLoading ? (
+          <div className="animate-spin rounded-full h-6 w-6 border-t-2 border-b-2 border-"></div>
+        ) : (
+          <>
+            {icon && <Image alt='icon' src={icon} width={20} height={20} />}
+            <div className='w-full'>{value}</div>
+          </>
+        )}
+
       </div>
-    </button>
-  )
+    </button >
+  );
 }
 
