@@ -15,6 +15,7 @@ export default function EmailRequest({ value }: EmailRequestProps) {
   }
 
   const handleWaitlist = () => {
+    
     console.log('handle waitlist', email)
   }
   
@@ -31,27 +32,29 @@ export default function EmailRequest({ value }: EmailRequestProps) {
     },
   }
   return (
-
-    <div className='relative flex items-center xl:w-2/3 '>
-      <div className=' w-full'>
-        <InputField
-          value={email}
-          placeholder='Your email'
-          required={false}
-          type='text'
-          className='text-xs text-[#475569] '
-          label=''
-          onChange={handleEmail}
-          {...inputFieldStylingProps}
-        />
+    <div>
+      <div className='relative  flex items-center xl:w-2/3 '>
+        <div className=' w-full'>
+          <InputField
+            value={email}
+            placeholder='Your email'
+            required={false}
+            type='text'
+            className='text-sm text-[#475569] '
+            label=''
+            onChange={handleEmail}
+            {...inputFieldStylingProps}
+          />
+        </div>
+        <div className='absolute right-0'>
+          <Button
+            value={value}
+            styling='bg-[#002674] text-white py-2 px-4 mt-2 mr-1 rounded-full'
+            onClick={value == 'Early Access' ? handleWaitlist : bookDemo}
+          />
+        </div>
       </div>
-      <div className='absolute right-0'>
-        <Button
-          value={value}
-          styling='bg-[#002674] text-white py-2 px-4 mt-2 mr-1 rounded-full'
-          onClick={value == 'Early Access' ? handleWaitlist : bookDemo}
-        />
-      </div>
+      <p className={`text-xs text-[#00B7FE] font-bold pl-3 rounded-lg mt-2 lg:text-lg ${false ? 'invisible' : ''}`}>Congratulations!! You have been added to the waitlist.</p>
     </div>
   )
 }
