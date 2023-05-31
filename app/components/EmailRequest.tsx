@@ -52,8 +52,8 @@ export default function EmailRequest({ value }: EmailRequestProps) {
     },
   }
   return (
-    <div className="min-h-[6.7rem]">
-      <div className='relative  flex items-center xl:w-2/3 '>
+    <div className="min-h-[6.7rem]" >
+      <div className='relative  flex items-center  xl:w-3/4  ' style={{ background: 'red' }}>
         <div className=' w-full'>
           <InputField
             value={email}
