@@ -1,7 +1,9 @@
+'use client'
+
 import Button from "./Button";
 import InputField from "./InputField";
 import { useState } from "react";
-
+import apiQuery from '../api'
 interface EmailRequestProps {
   value?: string
   // onClick?: () => void
@@ -9,16 +11,31 @@ interface EmailRequestProps {
 
 export default function EmailRequest({ value }: EmailRequestProps) {
   const [email, setEmail] = useState('')
+  const [responseMessage, setResponseMessage] = useState('')
+  const [isError, setIsError] = useState(false)
 
   const handleEmail = (email: string) => {
     setEmail(email)
   }
 
-  const handleWaitlist = () => {
-    
-    console.log('handle waitlist', email)
+  const handleWaitlist = async () => {
+    const response = await apiQuery('waitlist', 'POST', { email: email })
+    if (response.hasOwnProperty('email') && response.email === email) {
+      setResponseMessage("Congratulations!!! You have been added to the waitlist.")
+      setTimeout(() => {
+        setResponseMessage("")
+      }, 5000)
+    } else if (response.status === 422) {
+      setResponseMessage("Email aldready exist")
+      setIsError(true)
+      setTimeout(() => {
+        setResponseMessage("")
+        setIsError(false)
+      }, 5000)
+    }
+
   }
-  
+
   const bookDemo = () => {
     console.log('book demo', email)
   }
@@ -50,11 +67,11 @@ export default function EmailRequest({ value }: EmailRequestProps) {
           <Button
             value={value}
             styling='bg-[#002674] text-white py-2 px-4 mt-2 mr-1 rounded-full'
-            onClick={value == 'Early Access' ? handleWaitlist : bookDemo}
+            onClick={value === 'Early Access' ? handleWaitlist : bookDemo}
           />
         </div>
       </div>
-      <p className={`text-xs text-[#00B7FE] font-bold pl-3 rounded-lg mt-2 lg:text-lg ${false ? 'invisible' : ''}`}>Congratulations!! You have been added to the waitlist.</p>
+      <p className={`text-xs ${isError ? "text-red-500" : "text-[#00B7FE]"} font-bold pl-3 rounded-lg mt-2 lg:text-lg ${false ? 'invisible' : ''}`}>{responseMessage}</p>
     </div>
   )
 }
