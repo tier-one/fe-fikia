@@ -19,7 +19,7 @@ export default function Button({
     <button className={styling} onClick={onClick} disabled={isLoading}>
       <div className='flex items-center'>
         {isLoading ? (
-          <div className="animate-spin rounded-full h-6 w-6 border-t-2 border-b-2 border-"></div>
+          <div className="animate-spin rounded-full h-6 w-6 border-t-2 border-b-2 border-white"></div>
         ) : (
           <>
             {icon && <Image alt='icon' src={icon} width={20} height={20} />}
