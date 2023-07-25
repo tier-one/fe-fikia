@@ -5,6 +5,9 @@ import Link from 'next/link';
 import InputField from '@/app/components/InputField';
 import { useState } from 'react';
 import Button from '@/app/components/Button';
+import { useFormik } from "formik";
+import * as Yup from "yup";
+
 
 const inputFieldStylingProps = {
   container: {
@@ -21,6 +24,27 @@ const inputFieldStylingProps = {
 export default function ForgotPassword() {
   const [email, setEmail] = useState('')
 
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+    },
+
+    validationSchema: Yup.object({
+      email: Yup.string()
+        .email("Invalid email format")
+        .matches(
+          /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+          "Invalid email format"
+        )
+        .required("Your email is required"),
+    }),
+
+    onSubmit: (values) => {
+      console.log(values);
+      
+    },
+  });
+
   const handleEmail = (email: string) => {
     setEmail(email)
   }
@@ -35,13 +59,15 @@ export default function ForgotPassword() {
         <h1 className='text-4xl font-bold text-[#475569]'>Forgot password?</h1>
         <p className='text-base py-3 text-[#475569]'>No worries, we&apos;ll send you reset instructions</p>
         <InputField
-            value={email}
+            value={formik.values.email}
             placeholder='Enter your email here'
             required={false}
             type='text'
+            name="email"
             className='text-xs'
             label='Email'
-            onChange={handleEmail}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             {...inputFieldStylingProps}
         />
         <div className='flex flex-col space w-full  py-3'>

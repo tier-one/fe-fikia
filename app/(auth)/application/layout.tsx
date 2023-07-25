@@ -1,24 +1,23 @@
-// import Navbar from './components/Navbar'
-import Navbar from '../../components/Navbar2';
 import '../../globals.css'
 import { Inter, Jost } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/react';
 
 const jost = Jost({ subsets: ['latin'] })
 
 export const metadata = {
-  title: 'Profile',
+  title: 'Authentication',
   description: 'Investments made easy.',
 }
 
-export default function DashboardLayout({
+export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
   return (
     <html lang="en">
-      <body suppressHydrationWarning={true} className={jost.className}>
-        <Navbar />
+      <Analytics />
+      <body className={jost.className}>
         {children}
       </body>
     </html>

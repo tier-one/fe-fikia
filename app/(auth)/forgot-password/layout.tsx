@@ -1,8 +1,8 @@
 import Image from "next/image"
 import { Jost } from 'next/font/google'
-import Logo from '../../public/fikia logo_full color 1.svg'
-import Waves from '../../public/waves-login.svg'
-import '../globals.css'
+import Logo from '../../../public/fikia logo_full color 1.svg'
+import Waves from '../../../public/waves-login.svg'
+import '../../globals.css'
 
 const jost = Jost({ subsets: ['latin'] })
 
