@@ -1,50 +1,50 @@
 import * as Yup from "yup";
 
 export const formikValidationSchema = Yup.object({
-  first_name: Yup.string()
+  firstName: Yup.string()
     .max(20, "Must be less than 20 characters")
     .required("First name is required"),
-  sur_name: Yup.string()
+  middleName: Yup.string()
     .max(20, "Must be less than 20 characters")
     .required("Sur name is required"),
-  last_name: Yup.string()
+  lastName: Yup.string()
     .max(20, "Must be less than 20 characters")
     .required("Last name is required"),
-  date_of_birth: Yup.date()
+  dateOfBirth: Yup.date()
     .max(new Date(), "Date of Birth must be in the past")
     .required("Date of Birth is required"),
-  phone: Yup.string()
+  phoneNumber: Yup.string()
     .matches(
       /^\+\d{1,3}\s?\d{9,15}$/,
       "Invalid phone number format(Ex: +123 456789012)"
     )
     .required("Phone is required"),
-  ID_number: Yup.string()
+  governmentId: Yup.string()
     .matches(/^[a-zA-Z\d]{6,20}$/, "Invalid ID Number format")
     .required("ID Number is required"),
 
 
-  bank_name: Yup.string()
+  name: Yup.string()
     .min(2, "Bank Name is too short")
     .max(50, "Bank Name is too long")
     .required("Bank Name is required"),
-  branch_name: Yup.string()
+  branchName: Yup.string()
     .min(2, "Branch Name is too short")
     .max(50, "Branch Name is too long")
     .required("Branch Name is required"),
-  account_No: Yup.string()
+  accountNumber: Yup.string()
     .matches(/^\d{6,20}$/, "Invalid Account No. format")
     .required("Account No. is required"),
-  swift_code: Yup.string()
+  swiftCode: Yup.string()
     .matches(/^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$/, "Invalid Swift Code format")
     .required("Swift Code is required"),
 
 
-  applicants_resident: Yup.string()
+  residence: Yup.string()
     .required("Applicant's resident is required"),
-  applicants_occupation: Yup.string()
+  occupation: Yup.string()
     .required("Applicant's occupation is required"),
-  applicants_fund: Yup.string()
+  sourceOfFunds: Yup.string()
     .required("Applicant's fund is required"),
 
 });

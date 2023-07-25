@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React from "react";
 import Button from "./Button";
 import Modal from "./Modal";
@@ -18,6 +19,11 @@ const SuccessfulModel = ({
   isPopupOpen,
   handleClose,
 }: Props) => {
+  const router = useRouter();
+  const handleBackToHome = () => {
+    router.push('/')
+  }
+
   return (
     <Modal isOpen={isPopupOpen} onClose={handleClose}>
       <div className="bg-[#FFF] rounded-[16px] p-[24px] flex flex-col items-center justify-center gap-[25px]">
@@ -43,6 +49,8 @@ const SuccessfulModel = ({
             <Button
               styling="bg-[#002674] text-white py-2 px-4 mt-2  rounded-lg "
               value={buttonValue}
+              isDisabled={true}
+              onClick={handleBackToHome}
             />
           </div>
         </div>

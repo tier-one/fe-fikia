@@ -2,11 +2,31 @@
 
 import kycVerification from '@/lib/actions/KYC_Verification/kycVerification';
 import React, { useEffect, useCallback } from 'react';
+import { useSession } from "next-auth/react";
 
-function SmartCamera(): JSX.Element {
-  const handleImagesComputed = useCallback((event: CustomEvent) => {
-    console.log('Capture event:', event.detail);
-    kycVerification(event.detail)
+type Props = {
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>,
+  setKycError: React.Dispatch<React.SetStateAction<string>>,
+  setKycSuccess: React.Dispatch<React.SetStateAction<string>>,
+};
+
+function SmartCamera({ setKycError, setKycSuccess, setIsLoading }: Props): JSX.Element {
+  const {data: session} = useSession();
+  const userId = session?.user?.id;
+  
+
+  const handleImagesComputed = useCallback(async (event: CustomEvent) => {
+    try {
+      setIsLoading(true);
+
+      const results = await kycVerification(event.detail, userId);
+
+      setKycSuccess('Succefully verified!')
+    } catch (error) {
+      setKycError('Error occured! please try again or contact the administrator')
+    } finally {
+      setIsLoading(false)
+    }
   }, []);
 
   useEffect(() => {
@@ -17,7 +37,7 @@ function SmartCamera(): JSX.Element {
       import('@smile_identity/smart-camera-web').then(() => {
         app = document.querySelector('smart-camera-web');
         if (app) {
-          app.addEventListener('imagesComputed' as keyof ElementEventMap, handleImagesComputed as EventListenerOrEventListenerObject);
+          app.addEventListener('imagesComputed' as keyof ElementEventMap, handleImagesComputed as unknown as EventListenerOrEventListenerObject);
         }
       });
     }
@@ -25,7 +45,7 @@ function SmartCamera(): JSX.Element {
     return () => {
       // Remove the event listener when the component is unmounted
       if (app) {
-        app.removeEventListener('imagesComputed' as keyof ElementEventMap, handleImagesComputed as EventListenerOrEventListenerObject);
+        app.removeEventListener('imagesComputed' as keyof ElementEventMap, handleImagesComputed as unknown as EventListenerOrEventListenerObject);
       }
     };
   }, [handleImagesComputed]);

@@ -41,31 +41,35 @@ const ApplicationDetailsSection = ({
     router.push('/profile')
   }
 
+  // let detailsArray: { firstName: string; middleName: string; lastName: string; dateOfBirth: string; phoneNumber: string; governmentId: string; name: string; branchName: string; accountNumber: string; swiftCode: string; residence: string; occupation: string; sourceOfFunds: string; }[] = [];
+
   const formik = useFormik({
     initialValues: {
-      first_name: "",
-      sur_name: "",
-      last_name: "",
-      date_of_birth: "",
-      phone: "",
-      ID_number: "",
+      firstName: "",
+      middleName: "",
+      lastName: "",
+      dateOfBirth: "",
+      phoneNumber: "",
+      governmentId: "",
 
-      bank_name: "",
-      branch_name: "",
-      account_No: "",
-      swift_code: "",
+      name: "",
+      branchName: "",
+      accountNumber: "",
+      swiftCode: "",
 
-      applicants_resident: "",
-      applicants_occupation: "",
-      applicants_fund: "",
+      residence: "",
+      occupation: "",
+      sourceOfFunds: "",
     },
 
     validationSchema: formikValidationSchema,
 
     onSubmit: (values) => {
       handleContinue();
-      console.log(values);
+
+      // detailsArray.push(values)
       
+      localStorage.setItem('profileDetails', JSON.stringify(values));
     },
   });
 
@@ -83,39 +87,39 @@ const ApplicationDetailsSection = ({
               <div className="flex flex-col lg:flex-row items-center gap-[24px] self-stretch">
                 <div className="w-full h-[100px] flex flex-col justify-start items-center">
                   <InputField
-                    value={formik.values.first_name}
+                    value={formik.values.firstName}
                     placeholder="Enter your First Name here"
                     required={false}
                     type="text"
-                    name="first_name"
+                    name="firstName"
                     className="text-xs"
                     label="First Name"
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     {...inputFieldStylingProps}
                   />
-                  {formik.touched.first_name && formik.errors.first_name ? (
+                  {formik.touched.firstName && formik.errors.firstName ? (
                     <p className="flex px-[3px] text-[10px] text-center text-red-600 self-stretch">
-                      {formik.errors.first_name}
+                      {formik.errors.firstName}
                     </p>
                   ) : null}
                 </div>
                 <div className="w-full h-[100px] flex flex-col justify-start items-center">
                   <InputField
-                    value={formik.values.sur_name}
+                    value={formik.values.middleName}
                     placeholder="Enter your SurName here"
                     required={false}
                     type="text"
-                    name="sur_name"
+                    name="middleName"
                     className="text-xs"
                     label="SurName"
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     {...inputFieldStylingProps}
                   />
-                  {formik.touched.sur_name && formik.errors.sur_name ? (
+                  {formik.touched.middleName && formik.errors.middleName ? (
                     <p className="flex px-[3px] text-[10px] text-center text-red-600 self-stretch">
-                      {formik.errors.sur_name}
+                      {formik.errors.middleName}
                     </p>
                   ) : null}
                 </div>
@@ -123,40 +127,40 @@ const ApplicationDetailsSection = ({
               <div className="flex flex-col lg:flex-row items-center gap-[24px] self-stretch">
                 <div className="w-full h-[100px] flex flex-col justify-start items-center">
                   <InputField
-                    value={formik.values.last_name}
+                    value={formik.values.lastName}
                     placeholder="Enter your Last Name here"
                     required={false}
                     type="text"
-                    name="last_name"
+                    name="lastName"
                     className="text-xs"
                     label="Last Name"
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     {...inputFieldStylingProps}
                   />
-                  {formik.touched.last_name && formik.errors.last_name ? (
+                  {formik.touched.lastName && formik.errors.lastName ? (
                     <p className="flex px-[3px] text-[10px] text-center text-red-600 self-stretch">
-                      {formik.errors.last_name}
+                      {formik.errors.lastName}
                     </p>
                   ) : null}
                 </div>
                 <div className="w-full h-[100px] flex flex-col justify-start items-center">
                   <InputField
-                    value={formik.values.date_of_birth}
+                    value={formik.values.dateOfBirth}
                     placeholder="Enter your Date of Birth here"
                     required={false}
                     type="date"
-                    name="date_of_birth"
+                    name="dateOfBirth"
                     className="text-xs"
                     label="Date of Birth"
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     {...inputFieldStylingProps}
                   />
-                  {formik.touched.date_of_birth &&
-                  formik.errors.date_of_birth ? (
+                  {formik.touched.dateOfBirth &&
+                  formik.errors.dateOfBirth ? (
                     <p className="flex px-[3px] text-[10px] text-center text-red-600 self-stretch">
-                      {formik.errors.date_of_birth}
+                      {formik.errors.dateOfBirth}
                     </p>
                   ) : null}
                 </div>
@@ -164,39 +168,39 @@ const ApplicationDetailsSection = ({
               <div className="flex flex-col lg:flex-row items-center gap-[24px] self-stretch">
                 <div className="w-full h-[100px] flex flex-col justify-start items-center">
                   <InputField
-                    value={formik.values.phone}
-                    placeholder="Enter your Phone here"
+                    value={formik.values.phoneNumber}
+                    placeholder="Enter your phoneNumber here"
                     required={false}
                     type="text"
-                    name="phone"
+                    name="phoneNumber"
                     className="text-xs"
-                    label="Phone"
+                    label="phoneNumber"
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     {...inputFieldStylingProps}
                   />
-                  {formik.touched.phone && formik.errors.phone ? (
+                  {formik.touched.phoneNumber && formik.errors.phoneNumber ? (
                     <p className="flex px-[3px] text-[10px] text-center text-red-600 self-stretch">
-                      {formik.errors.phone}
+                      {formik.errors.phoneNumber}
                     </p>
                   ) : null}
                 </div>
                 <div className="w-full h-[100px] flex flex-col justify-start items-center">
                   <InputField
-                    value={formik.values.ID_number}
+                    value={formik.values.governmentId}
                     placeholder="Enter your ID Number here"
                     required={false}
                     type="text"
-                    name="ID_number"
+                    name="governmentId"
                     className="text-xs"
                     label="ID Number"
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     {...inputFieldStylingProps}
                   />
-                  {formik.touched.ID_number && formik.errors.ID_number ? (
+                  {formik.touched.governmentId && formik.errors.governmentId ? (
                     <p className="flex px-[3px] text-[10px] text-center text-red-600 self-stretch">
-                      {formik.errors.ID_number}
+                      {formik.errors.governmentId}
                     </p>
                   ) : null}
                 </div>
@@ -247,39 +251,39 @@ const ApplicationDetailsSection = ({
             <div className="flex flex-col lg:flex-row items-center gap-[24px] self-stretch">
               <div className="w-full h-[100px] flex flex-col justify-start items-center">
                 <InputField
-                  value={formik.values.bank_name}
+                  value={formik.values.name}
                   placeholder="Enter your Bank Name here"
                   required={false}
                   type="text"
-                  name="bank_name"
+                  name="name"
                   className="text-xs"
                   label="Bank Name"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   {...inputFieldStylingProps}
                 />
-                {formik.touched.bank_name && formik.errors.bank_name ? (
+                {formik.touched.name && formik.errors.name ? (
                   <p className="flex px-[3px] text-[10px] text-center text-red-600 self-stretch">
-                    {formik.errors.bank_name}
+                    {formik.errors.name}
                   </p>
                 ) : null}
               </div>
               <div className="w-full h-[100px] flex flex-col justify-start items-center">
                 <InputField
-                  value={formik.values.branch_name}
+                  value={formik.values.branchName}
                   placeholder="Enter your Branch Name here"
                   required={false}
                   type="text"
-                  name="branch_name"
+                  name="branchName"
                   className="text-xs"
                   label="Branch Name"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   {...inputFieldStylingProps}
                 />
-                {formik.touched.branch_name && formik.errors.branch_name ? (
+                {formik.touched.branchName && formik.errors.branchName ? (
                   <p className="flex px-[3px] text-[10px] text-center text-red-600 self-stretch">
-                    {formik.errors.branch_name}
+                    {formik.errors.branchName}
                   </p>
                 ) : null}
               </div>
@@ -287,39 +291,39 @@ const ApplicationDetailsSection = ({
             <div className="flex flex-col lg:flex-row items-center gap-[24px] self-stretch">
               <div className="w-full h-[100px] flex flex-col justify-start items-center">
                 <InputField
-                  value={formik.values.account_No}
+                  value={formik.values.accountNumber}
                   placeholder="Enter your Account No. here"
                   required={false}
                   type="text"
-                  name="account_No"
+                  name="accountNumber"
                   className="text-xs"
                   label="Account No."
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   {...inputFieldStylingProps}
                 />
-                {formik.touched.account_No && formik.errors.account_No ? (
+                {formik.touched.accountNumber && formik.errors.accountNumber ? (
                   <p className="flex px-[3px] text-[10px] text-center text-red-600 self-stretch">
-                    {formik.errors.account_No}
+                    {formik.errors.accountNumber}
                   </p>
                 ) : null}
               </div>
               <div className="w-full h-[100px] flex flex-col justify-start items-center">
                 <InputField
-                  value={formik.values.swift_code}
+                  value={formik.values.swiftCode}
                   placeholder="Enter your Swift Code here"
                   required={false}
                   type="text"
-                  name="swift_code"
+                  name="swiftCode"
                   className="text-xs"
                   label="Swift Code"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   {...inputFieldStylingProps}
                 />
-                {formik.touched.swift_code && formik.errors.swift_code ? (
+                {formik.touched.swiftCode && formik.errors.swiftCode ? (
                   <p className="flex px-[3px] text-[10px] text-center text-red-600 self-stretch">
-                    {formik.errors.swift_code}
+                    {formik.errors.swiftCode}
                   </p>
                 ) : null}
               </div>

@@ -7,6 +7,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import SmartCamera from "./SmartCamera";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 type Props = {
   handleContinue: () => void;
@@ -15,7 +16,13 @@ type Props = {
 };
 
 const DocumentationSection = ({ handleContinue, handleBack, visible }: Props) => {
+  const [kycError, setKycError] = useState('');
+  const [kycSuccess, setKycSuccess] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const {data: session} = useSession();
   const router = useRouter();
+
+  const userId = session?.user?.id;
   
   const handleCancel = () => {
     router.push('/profile')
@@ -23,16 +30,40 @@ const DocumentationSection = ({ handleContinue, handleBack, visible }: Props) =>
 
   const formik = useFormik({
     initialValues: {
-      image: "",
+      governmentIdImage: "",
     },
 
     validationSchema: Yup.object({
-      image: Yup.string()
+      governmentIdImage: Yup.string()
           .required("Your ID copy is required"),
     }),
 
     onSubmit: (values) => {
-      handleContinue();
+      if (!isLoading && !kycError && kycSuccess) {
+        const storedData = localStorage.getItem('profileDetails');
+
+        if (storedData) {
+          let detailsArray = JSON.parse(storedData);
+
+          detailsArray = {...detailsArray, ...values}
+
+          localStorage.setItem('profileDetails', JSON.stringify(detailsArray));
+        }
+
+        handleContinue();
+      } else if(isLoading) {
+        setKycError('Wait for the verification');
+
+        setTimeout(() => {
+          setKycError('')
+        }, 2000);
+      } else {
+        setKycError('verify first');
+
+        setTimeout(() => {
+          setKycError('')
+        }, 5000);
+      }
     },
   });
 
@@ -54,7 +85,7 @@ const DocumentationSection = ({ handleContinue, handleBack, visible }: Props) =>
     reader.onload = () => {
       const result = reader.result as string;
 
-      formik.handleChange("image")(result);
+      formik.handleChange("governmentIdImage")(result);
     };
   };
   
@@ -80,7 +111,7 @@ const DocumentationSection = ({ handleContinue, handleBack, visible }: Props) =>
             htmlFor="file"
             className="flex justify-center items-center z-10 text-center w-full lg:min-h-[275px] min-h-[200px] p-20 text-[#64748A] border-2 border-[#CAD4E0] border-dashed"
           >
-            {!formik.values.image &&( 
+            {!formik.values.governmentIdImage &&( 
             <span className="flex flex-col justify-center items-center gap-[5px]">
                 <Image 
                     src='/file_upload.svg'
@@ -91,24 +122,24 @@ const DocumentationSection = ({ handleContinue, handleBack, visible }: Props) =>
                 <p className="text-[#64748A] text-[14px] font-[400] leading-[28px]">Drag & Drop or Choose a <span className="text-[#002674]">file</span> to upload</p>
             </span>)}
           </label>
-          {formik.touched.image && formik.errors.image ? (
+          {formik.touched.governmentIdImage && formik.errors.governmentIdImage ? (
             <p className="flex px-[3px] text-[10px] text-center text-red-600 self-stretch">
-              {formik.errors.image}
+              {formik.errors.governmentIdImage}
             </p>
           ) : null}
           <input
-            id="image"
+            id="governmentIdImage"
             type="file"
-            name="image"
+            name="governmentIdImage"
             accept="image/*"
             required={true}
             className="absolute z-30 w-full opacity-0 h-full cursor-pointer"
             onChange={handleChangeImage}
             onBlur={formik.handleBlur}
           />
-          {formik.values.image && (
+          {formik.values.governmentIdImage && (
             <Image
-              src={formik.values.image }
+              src={formik.values.governmentIdImage }
               className="sm:p-10 object-contain z-20 h-full"
               alt="document"
               fill
@@ -118,8 +149,11 @@ const DocumentationSection = ({ handleContinue, handleBack, visible }: Props) =>
 
         <div className="w-full h-[1px] bg-[#E1E7EF]"></div>
 
-        <div className="w-full flex justify-center items-center">
-          <SmartCamera />
+        <div className="w-full flex flex-col gap-[20px] justify-center items-center">
+          <SmartCamera setKycError={setKycError} setKycSuccess={setKycSuccess} setIsLoading={setIsLoading}/>
+          {isLoading && <div className="animate-spin rounded-full h-[50px] w-[50px] border-t-2 border-b-2 border-black"></div>}
+          {kycSuccess && <div className="flex text-[30px] font-[700] text-green-500">{kycSuccess}</div>}
+          {kycError && <div className="flex text-[30px] font-[700] text-red-400">{kycError}</div>}
         </div>
 
         <div className="w-full h-[1px] bg-[#E1E7EF]"></div>

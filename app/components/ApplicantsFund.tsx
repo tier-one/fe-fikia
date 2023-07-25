@@ -4,21 +4,21 @@ import RadioInput from './RadioInput';
 
 type Props = {
   formik: FormikProps<{
-    first_name: string;
-    sur_name: string;
-    last_name: string;
-    date_of_birth: string;
-    phone: string;
-    ID_number: string;
+    firstName: string;
+    middleName: string;
+    lastName: string;
+    dateOfBirth: string;
+    phoneNumber: string;
+    governmentId: string;
 
-    bank_name: string;
-    branch_name: string;
-    account_No: string;
-    swift_code: string;
+    name: string;
+    branchName: string;
+    accountNumber: string;
+    swiftCode: string;
 
-    applicants_resident: string;
-    applicants_occupation: string;
-    applicants_fund: string;
+    residence: string;
+    occupation: string;
+    sourceOfFunds: string;
   }>;
 }
 
@@ -34,52 +34,52 @@ const ApplicantsFund = ({ formik }: Props) => {
             <RadioInput
               id="Saving"
               value="Saving"
-              name="applicants_fund"
+              name="sourceOfFunds"
               label="Saving"
-              checked={formik.values.applicants_fund === "Saving"}
+              checked={formik.values.sourceOfFunds === "Saving"}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
             />
             <RadioInput
               id="Salary"
               value="Salary"
-              name="applicants_fund"
+              name="sourceOfFunds"
               label="Salary"
-              checked={formik.values.applicants_fund === "Salary"}
+              checked={formik.values.sourceOfFunds === "Salary"}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
             />
             <RadioInput
               id="Inheritance"
               value="Inheritance"
-              name="applicants_fund"
+              name="sourceOfFunds"
               label="Inheritance"
-              checked={formik.values.applicants_fund === "Inheritance"}
+              checked={formik.values.sourceOfFunds === "Inheritance"}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
             />
             <RadioInput
               id="Bonus"
               value="Bonus"
-              name="applicants_fund"
+              name="sourceOfFunds"
               label="Bonus"
-              checked={formik.values.applicants_fund === "Bonus"}
+              checked={formik.values.sourceOfFunds === "Bonus"}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
             />
             <RadioInput
               id="others"
               value="others"
-              name="applicants_fund"
+              name="sourceOfFunds"
               label="others"
-              checked={formik.values.applicants_fund === "others"}
+              checked={formik.values.sourceOfFunds === "others"}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
             />
           </div>
-          {formik.touched.applicants_fund && formik.errors.applicants_fund ? (
+          {formik.touched.sourceOfFunds && formik.errors.sourceOfFunds ? (
             <p className="flex px-[3px] text-[10px] text-center text-red-600 self-stretch">
-              {formik.errors.applicants_fund}
+              {formik.errors.sourceOfFunds}
             </p>
           ) : null}
     </div>
