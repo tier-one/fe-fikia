@@ -179,7 +179,7 @@ export default function Login() {
         </div>
         <div className="w-full flex justify-center items-center mt-10">
           <Link
-            href="/"
+            href="/register"
             className="text-[#A0AEC0] font-[jost] text-[14px] cursor-pointer font-[400] leading-[140%]"
           >
             Don’t have an account?{" "}

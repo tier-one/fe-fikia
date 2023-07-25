@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import DropDownButton, { DropDownMenuType } from "./DropDownButton";
 import { useState } from "react";
+import Button from "./Button";
 
 
 const dropDownItem: DropDownMenuType = {
@@ -33,17 +34,27 @@ export default function Navbar() {
 
   return (
     <div className='bg-white z-50 fixed py-5 h-15 max-h-full drop-shadow-lg w-full flex justify-between px-5 lg:px-24'>
-      <div>
+      <div className="flex justify-center items-center">
         <Image 
           src='/fikia_logo.svg' 
           alt='fikia logo'
           width={90}
           height={0} />
       </div>
-      <div className='hidden lg:flex w-1/3 justify-around'>
-        <Link href='/'>Home</Link>
-        <DropDownButton {...dropDownItem} />
-        <Link href='/contact'>Contact Us</Link>
+      <div className="flex items-center gap-[40px]">
+        <div className='hidden lg:flex gap-[24px] justify-around'>
+          <Link href='/'>Home</Link>
+          <DropDownButton {...dropDownItem} />
+          <Link href='/contact'>Contact Us</Link>
+        </div>
+        <Link href='/login'>
+          <Button
+              onClick={() => {}}
+              styling="bg-[#002674] text-white text-[15px] font-[600] leading-[28px] py-[5px] px-[40px] rounded-[29px] "
+              value="Login"
+              isDisabled={true}
+          />
+        </Link>
       </div>
       <div className='lg:hidden'>
         <div onClick={handleHamburgerBtn}>
