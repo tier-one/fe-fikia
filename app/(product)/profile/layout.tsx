@@ -2,6 +2,7 @@
 import Navbar from '../../components/Navbar2';
 import '../../globals.css'
 import { Inter, Jost } from 'next/font/google'
+import AuthProvider from '@/app/components/AuthProvider';
 
 const jost = Jost({ subsets: ['latin'] })
 
@@ -13,14 +14,16 @@ export const metadata = {
 export default function DashboardLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
-      <body suppressHydrationWarning={true} className={jost.className}>
+    <body suppressHydrationWarning={true} className={jost.className}>
+      <AuthProvider>
         <Navbar />
         {children}
-      </body>
-    </html>
+      </AuthProvider>
+    </body>
+  </html>
   )
 }

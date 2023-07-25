@@ -1,12 +1,15 @@
 'use client'
+
 import Link from 'next/link'
 import Image from 'next/image'
-import Arrow from '../../../public/arrow.svg'
+import { usePathname, useRouter } from 'next/navigation'
+import Arrow from '../../../../public/arrow.svg'
 import InputField from '@/app/components/InputField'
 import { useState } from 'react'
 import Button from '@/app/components/Button' 
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import resetPassword from '@/lib/actions/reset_password/resetPassword'
 
 const inputFieldStylingProps = {
   container: {
@@ -21,6 +24,13 @@ const inputFieldStylingProps = {
 }
 
 export default function ResetPassword() {
+  const router = useRouter();
+  const pathname = usePathname();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const urlParts = pathname.split('/');
+  const token = urlParts[urlParts.length - 1];
+
   const formik = useFormik({
     initialValues: {
       newPassword: "",
@@ -36,16 +46,17 @@ export default function ResetPassword() {
           'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character'
         ),
       confirmPassword: Yup.string()
-        .min(8, 'Password must be at least 8 characters')
         .required('Confirm Password is required')
-        .matches(
-          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
-          'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character'
-        ),
+        .oneOf([Yup.ref('newPassword')], 'Passwords must match'),
     }),
 
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: async (values) => {
+      setIsLoading(true);
+
+      await resetPassword(values.newPassword, token, router);
+      
+
+      setIsLoading(false);
       
     },
   });
@@ -64,7 +75,7 @@ export default function ResetPassword() {
               value={formik.values.newPassword}
               placeholder='Enter your new password here'
               required={false}
-              type='text'
+              type='password'
               name="newPassword"
               className='text-xs'
               label='New Password'
@@ -72,13 +83,18 @@ export default function ResetPassword() {
               onBlur={formik.handleBlur}
               {...inputFieldStylingProps}
           />
+          {formik.touched.newPassword && formik.errors.newPassword ? (
+            <p className="flex text-[10px] text-center text-red-600 self-stretch px-[2px]">
+              {formik.errors.newPassword}
+            </p>
+          ) : null}
         </div>
         <div className='py-3'>
           <InputField
             value={formik.values.confirmPassword}
             placeholder='Confirm your new password here'
             required={false}
-            type='text'
+            type='password'
             name="confirmPassword"
             className='text-xs'
             label='Confirm Password'
@@ -86,9 +102,20 @@ export default function ResetPassword() {
             onBlur={formik.handleBlur}
             {...inputFieldStylingProps}
           />
+          {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
+            <p className="flex text-[10px] text-center text-red-600 self-stretch px-[2px]">
+              {formik.errors.confirmPassword}
+            </p>
+          ) : null}
         </div>
         <div className='flex flex-col space w-full  py-3'>
-          <Button styling='bg-[#002674] text-white py-2 px-4 mt-2  rounded-lg ' value='Change password' />
+          <Button 
+            onClick={formik.handleSubmit}
+            isLoading={isLoading}
+            isDisabled={true}
+            styling='bg-[#002674] text-white py-2 px-4 mt-2  rounded-lg ' 
+            value='Change password' 
+          />
         </div>
       </div>
     </main>
