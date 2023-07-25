@@ -7,6 +7,7 @@ import { useState } from "react";
 import apiQuery from '../api'
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import addToWaitList from "@/lib/actions/add_to_waitlist/addToWaitlist";
 
 interface EmailRequestProps {
   value?: string
@@ -14,18 +15,13 @@ interface EmailRequestProps {
 }
 
 export default function EmailRequest({ value }: EmailRequestProps) {
-  const [email, setEmail] = useState('')
   const [responseMessage, setResponseMessage] = useState('')
   const [isError, setIsError] = useState(false)
   const [isLoading, setIsLoading] = useState(false);
-  const handleEmail = (email: string) => {
-    setEmail(email)
-  }
 
   const formik = useFormik({
     initialValues: {
       email: "",
-      password: "",
     },
 
     validationSchema: Yup.object({
@@ -39,22 +35,27 @@ export default function EmailRequest({ value }: EmailRequestProps) {
     }),
 
     onSubmit: (values) => {
-      console.log(values);
+      if (value === 'Early Access') {
+        handleWaitlist(values.email)
+      } else {
+        bookDemo()
+      }
       
     },
   });
 
-  const handleWaitlist = async () => {
+  const handleWaitlist = async (email: string) => {
     if (validator.isEmail(email)) {
       setIsLoading(true);
-      const response = await apiQuery('waitlist', 'POST', { email: email })
+      const response = await addToWaitList(email);
+      
       if (response.hasOwnProperty('email') && response.email === email) {
         setIsLoading(false);
         setResponseMessage("Congratulations!!! You have been added to the waitlist.")
         setTimeout(() => {
           setResponseMessage("")
         }, 5000)
-      } else if (response.status === 422) {
+      } else if (response.response.status === 422) {
         setIsLoading(false);
         setResponseMessage("Email already exists")
         setIsError(true)
@@ -68,7 +69,7 @@ export default function EmailRequest({ value }: EmailRequestProps) {
   }
 
   const bookDemo = () => {
-    console.log('book demo', email)
+    console.log('book demo', formik.values.email)
   }
 
   const inputFieldStylingProps = {
@@ -99,10 +100,10 @@ export default function EmailRequest({ value }: EmailRequestProps) {
         <div className='absolute right-0'>
           <Button
             value={value}
-            styling={`${!validator.isEmail(email) ? 'bg-[#002674] bg-opacity-50' : 'bg-[#002674]'} text-white py-2 px-4 mt-2 mr-1 rounded-full`}
-            onClick={value === 'Early Access' ? handleWaitlist : bookDemo}
+            styling={`${!validator.isEmail(formik.values.email) ? 'bg-[#002674] bg-opacity-50' : 'bg-[#002674]'} text-white py-2 px-4 mt-2 mr-1 rounded-full`}
+            onClick={formik.handleSubmit}
             isLoading={isLoading}
-            isDisabled={validator.isEmail(email)}
+            isDisabled={true}
           />
         </div>
       </div>

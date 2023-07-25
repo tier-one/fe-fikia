@@ -48,9 +48,9 @@ export const authOptions: NextAuthOptions = {
       async signIn({ account, user, credentials }: { user: AdapterUser | User, account: Account | null, credentials?: Record<string, any> | undefined, }) {
         if (account?.provider === "google") {
 
-          await googleLogin(user?.name as string, user?.email as string);
+          const googleUser = await googleLogin(user?.name as string, user?.email as string);
 
-          return true;
+          return googleUser;
 
       
         } else if (account?.provider === "credentials") {

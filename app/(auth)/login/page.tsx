@@ -1,4 +1,5 @@
 "use client";
+
 import InputField from "@/app/components/InputField";
 import CheckBox from "@/app/components/CheckBox";
 import React, { useEffect, useState } from "react";
@@ -76,6 +77,7 @@ export default function Login() {
       });
 
       setIsLoading(false);
+      
 
       if (results && !results.error) {
         router.push("/dashboard");

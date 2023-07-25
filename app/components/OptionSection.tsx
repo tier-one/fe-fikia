@@ -1,6 +1,7 @@
 import React from "react";
 import Button from "./Button";
 import ListBox from "./ListBox";
+import { useRouter } from "next/navigation";
 
 type Props = {
     handleContinue: () => void;
@@ -11,6 +12,11 @@ type Props = {
 }
 
 const OptionsSection = ({ handleContinue, selected, setSelected, options, visible }: Props) => {
+  const router = useRouter();
+
+  const handleCancel = () => {
+    router.push('/profile')
+  }
 
   if (!visible) return null;
 
@@ -34,6 +40,8 @@ const OptionsSection = ({ handleContinue, selected, setSelected, options, visibl
           <div className="flex justify-end items-center gap-[16px] w-full">
             <div className="flex items-start gap-[16px]">
               <Button
+                onClick={handleCancel}
+                isDisabled={true}
                 styling="rounded-lg cursor-pointer text-sm bg-slate-100 font-medium w-24 h-12 overflow-hidden shrink-0 flex flex-row py-2 px-4 box-border items-center justify-center"
                 value="Cancel"
               />

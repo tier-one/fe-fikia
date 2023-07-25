@@ -26,9 +26,24 @@ const emailRegistration = async (email: string | null | undefined, password: str
     }
     try {
         const res = await API.post(`/api/v1/auth/email/register`, data);
+        console.log(res, 'This is register response');
+        
+
+        toast.success(res.data.message, {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'colored',
+      });
 
         return res.data;
     } catch (error) {
+      console.log(error, 'This is register error');
+      
         const customError = error as CustomError;
         const customError2 = error as CustomError2;
         

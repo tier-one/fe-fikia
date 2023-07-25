@@ -1,6 +1,7 @@
 import '../../globals.css'
 import { Inter, Jost } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/react';
+import AuthProvider from '@/app/components/AuthProvider';
 
 const jost = Jost({ subsets: ['latin'] })
 
@@ -18,7 +19,9 @@ export default function RootLayout({
     <html lang="en">
       <Analytics />
       <body className={jost.className}>
-        {children}
+        <AuthProvider>
+          {children}
+        </AuthProvider>
       </body>
     </html>
   )

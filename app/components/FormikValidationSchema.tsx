@@ -2,13 +2,13 @@ import * as Yup from "yup";
 
 export const formikValidationSchema = Yup.object({
   first_name: Yup.string()
-    .max(10, "Must be less than 10 characters")
+    .max(20, "Must be less than 20 characters")
     .required("First name is required"),
   sur_name: Yup.string()
-    .max(10, "Must be less than 10 characters")
+    .max(20, "Must be less than 20 characters")
     .required("Sur name is required"),
   last_name: Yup.string()
-    .max(15, "Must be less than 15 characters")
+    .max(20, "Must be less than 20 characters")
     .required("Last name is required"),
   date_of_birth: Yup.date()
     .max(new Date(), "Date of Birth must be in the past")

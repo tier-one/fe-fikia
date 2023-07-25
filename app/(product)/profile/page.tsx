@@ -6,6 +6,8 @@ import Button from '../../components/Button';
 import InputField from '../../components/InputField';
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import Link from 'next/link';
+import { useSession } from 'next-auth/react';
 
 const inputFieldStylingProps = {
   container: {
@@ -19,7 +21,10 @@ const inputFieldStylingProps = {
   },
 }
 
+
 const Profile = () => {
+  const {data: session} = useSession();
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -54,13 +59,18 @@ const Profile = () => {
     <div className='bg-[#EAEAED] h-[88vh] p-[40px]'>
       <h1 className='text-[#475569] font-[jost] text-[32px] font-[500] leading-normal'>Profile</h1>
       <div className='flex w-full py-[40px] px-[24px] flex-col items-start gap-[24px] rounded-[8px] bg-[#FFF]'>
-        <div className='rounded-[72px]'>
-          <Image
-            src='/Ellipse 2.svg'
-            width={72}
-            height={72}
-            alt='profile'
-          />
+        <div className='flex justify-center items-center gap-5'>
+          <div className='rounded-[72px]'>
+            <Image
+              src='/Ellipse 2.svg'
+              width={72}
+              height={72}
+              alt='profile'
+            />
+          </div>
+
+          {session?.user && !session?.user?.bankDetails && <div className='bg-red-200 px-[10px] py-[2px] text-[10px] rounded-[50px]'>Not Verifyed</div>}
+          {session?.user && session?.user?.bankDetails && <div className='bg-green-200 px-[10px] py-[2px] text-[10px] rounded-[50px]'>Verified</div>}
         </div>
 
         <div className='flex w-full sm:w-[350px] flex-col items-start gap-[8px]'>
@@ -110,6 +120,7 @@ const Profile = () => {
           </div>
 
           <div className='flex flex-col space w-full py-3'>
+            <Link href='/application'><Button styling='bg-[#002674] text-white py-[10px] px-[8px] mt-2  rounded-[12px] w-full' value='Update Profile' isDisabled={true} /></Link>
             <Button styling='bg-[#002674] text-white py-[10px] px-[8px] mt-2  rounded-[12px] ' value='Save changes' />
           </div>
         </div>

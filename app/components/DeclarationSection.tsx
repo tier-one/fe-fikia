@@ -6,6 +6,7 @@ import Button from "./Button";
 import SuccessfulModel from "./SuccessfulModel";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useRouter } from "next/navigation";
 
 type Props = {
   handleContinue: () => void;
@@ -15,6 +16,10 @@ type Props = {
 
 const DeclarationSection = ({ handleContinue, handleBack, visible }: Props) => {
   const [isSuccessfulModalOpen, setIsSuccessfulModalOpen] = useState(false);
+  const router = useRouter();
+  const handleCancel = () => {
+    router.push('/profile')
+  }
 
   const openSuccessfulModal = () => {
     setIsSuccessfulModalOpen(true)
@@ -187,6 +192,8 @@ const DeclarationSection = ({ handleContinue, handleBack, visible }: Props) => {
 
           <div className="flex flex-wrap items-start gap-[16px]">
             <Button
+              onClick={handleCancel}
+              isDisabled={true}
               styling="rounded-lg cursor-pointer bg-slate-100 text-sm font-medium w-24 h-12 overflow-hidden shrink-0 flex flex-row py-2 px-4 box-border items-center justify-center"
               value="Cancel"
             />
