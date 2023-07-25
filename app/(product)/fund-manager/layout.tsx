@@ -1,5 +1,5 @@
-import Navbar from './components/Navbar'
-import './globals.css'
+import Navbar from '../../components/Navbar';
+import '../../globals.css'
 import { Inter, Jost } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/react';
 

@@ -1,8 +1,8 @@
 'use client'
 import Image from "next/image";
-import Faq from "./components/Faq";
-import Footer from "./components/Footer";
-import EmailRequest from "./components/EmailRequest";
+import Faq from "../components/Faq";
+import Footer from "../components/Footer";
+import EmailRequest from "../components/EmailRequest";
 
 export default function Home() {
 

@@ -60,7 +60,9 @@ export default function Contact() {
                 onChange={setMessage}
                 {...inputFieldStylingProps}
               />
-              <Button text="Get in touch" />
+              <div>
+                <Button text="Get in touch" />
+              </div>
             </form>
         </section>
 
