@@ -3,24 +3,15 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useState } from 'react'
-import { usePathname } from 'next/navigation';
-
-const variables = [
-    {
-        id: 1,
-        value: 'Unguka fund'
-    },
-    {
-        id: 2,
-        value: 'BRD fund'
-    }
-]
+import { useParams, usePathname } from 'next/navigation';
+import { variables } from '@/constants';
 
 const SideBar = () => {
   const pathname = usePathname();
   const [clickedIndex, setClickedIndex] = useState(-1);
   const [menu, setMenu] = useState(false);
-  const [hamburgerOpen, setHamburgerOpen] = useState(false)
+  const [hamburgerOpen, setHamburgerOpen] = useState(false);
+  const fundId = useParams().id;
     
   function handleHamburgerBtn() {
     setHamburgerOpen(!hamburgerOpen)
@@ -73,7 +64,7 @@ const SideBar = () => {
                             {variables.map((variable) => (
                                 <div onClick={() => handleClick(variable?.id)} key={variable?.id} className={`${clickedIndex === variable?.id && 'border-r-4 border-solid border-[#60A4F9]'} flex px-[16px] py-[12px] items-center gap-[15px] self-stretch cursor-pointer`}>
                                     <span className='bg-[#60A4F9] p-[8px] w-[32px] h-[32px] flex text-white text-[16px] font-[700] leading-[20px] justify-center items-center rounded-[4px]'>{variable?.value?.charAt(0)}</span>
-                                    <h1 className={`${clickedIndex === variable?.id ? 'text-[#00B7FE]' : 'text-[#334155]'} text-[14px] font-[500] leading-[20px]`}>{variable?.value}</h1>
+                                    <Link href={`/portfolio/${variable?.id}`} className={`${clickedIndex === variable?.id ? 'text-[#00B7FE]' : 'text-[#334155]'} text-[14px] font-[500] leading-[20px]`}>{variable?.value}</Link>
                                 </div>
                             ))}
                         </div>

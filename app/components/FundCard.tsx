@@ -6,14 +6,14 @@ import NewButton from './NewButton';
 
 type Props = {
     fundDetails: {
-        id: number;
+        id: any;
         fundLogo: string;
         fundName: string;
         fundSymbol: string;
-        inception: string;
-        lunchedDate: string,
-        price: string,
-        avm: string
+        FundGoal: string;
+        lunchedDate: string;
+        CustodianParcentage: string;
+        TrustPercentage: string;
     }
     containerStyle: string
 }
@@ -29,14 +29,14 @@ const FundCard = ({ fundDetails, containerStyle }: Props) => {
             <div className='flex justify-between items-start self-stretch'>
                 <div className='flex items-center gap-[9px]'>
                     <div className='w-[40px] h-[40px] rounded-[8px] bg-[#F7F9FB]'>
-                        {fundDetails?.fundLogo && (
+                        {/* {fundDetails?.fundLogo && (
                             <Image 
                                 src={fundDetails?.fundLogo}
                                 width={37}
                                 height={37}
                                 alt='fundLogo'
                             />
-                        )}
+                        )} */}
                     </div>
 
                     <div className='flex flex-col items-start gap-[2px]'>
@@ -59,9 +59,9 @@ const FundCard = ({ fundDetails, containerStyle }: Props) => {
             <div className='flex items-start gap-[16px]'>
                 <div className='flex flex-col items-start gap-[8px]'>
                     <h1 className='flex justify-center items-center gap-[16px] text-[#64748A] text-[14px] font-[400] leading-[21px]'>
-                        Since inception
+                        FundGoal
                         <span className='text-[#475569] text-[14px] font-[500] leading-[21px]'>
-                            {fundDetails.inception}
+                            {fundDetails.FundGoal}
                         </span>
                     </h1>
 
@@ -73,16 +73,16 @@ const FundCard = ({ fundDetails, containerStyle }: Props) => {
                     </h1>
 
                     <h1 className='flex justify-center items-center gap-[16px] text-[#64748A] text-[14px] font-[400] leading-[21px]'>
-                        Minimul buy
+                        CustodianParcentage
                         <span className='text-[#475569] text-[14px] font-[500] leading-[21px]'>
-                            {fundDetails.price}
+                            {fundDetails.CustodianParcentage}
                         </span>
                     </h1>
 
                     <h1 className='flex justify-center items-center gap-[16px] text-[#64748A] text-[14px] font-[400] leading-[21px]'>
-                        AVM
+                        TrustPercentage
                         <span className='text-[#475569] text-[14px] font-[500] leading-[21px]'>
-                            {fundDetails.avm}
+                            {fundDetails.TrustPercentage}
                         </span>
                     </h1>
                 </div>

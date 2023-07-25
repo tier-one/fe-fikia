@@ -9,6 +9,7 @@ interface InputProps{
   type?: string
   name?: string
   icon?: string
+  dollarIcon?: any
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   className?: string
@@ -31,7 +32,8 @@ export default function InputField({
     required, 
     type,
     name,
-    icon, 
+    icon,
+    dollarIcon,
     onChange,
     onBlur,
     className,
@@ -45,10 +47,15 @@ export default function InputField({
   return (
     <div className={`${props.container?.className} ${className}`}>
       {label && required ?
-        <label className={props.inputlabel?.className} htmlFor="app-input-field">{label} <span className="text-ehr-red">*</span></label> :
+        <label className={props.inputlabel?.className} htmlFor="app-input-field">{label} <span className="text-red-500">*</span></label> :
         <label className={props.inputlabel?.className} htmlFor="app-input-field">{label}</label>}
       <div className="absolute mt-[2.6rem] ml-3">
-        {icon ? <Image alt='icon' src={icon} width={16} height={16} /> : ''}
+        {icon ? <Image alt='icon' src={icon} width={26} height={26} /> : ''}
+        
+      </div>
+
+      <div className="absolute mt-[36px] right-10">
+        {dollarIcon ? <Image alt='icon' src={dollarIcon} width={26} height={26} /> : ''}
         
       </div>
       <input
