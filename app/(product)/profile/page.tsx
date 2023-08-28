@@ -4,6 +4,8 @@ import Image from 'next/image';
 import React, { useState } from 'react'
 import Button from '../../components/Button';
 import InputField from '../../components/InputField';
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 const inputFieldStylingProps = {
   container: {
@@ -18,15 +20,35 @@ const inputFieldStylingProps = {
 }
 
 const Profile = () => {
-  const [profileData, setProfilenData] = useState({
-    email: '', firstName: '', lastName: ''
-  });
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      firstName: "",
+      lastName: "",
+    },
 
-  const handleChange = (fieldName: string, value: string) => {
-    setProfilenData((prevState) => ({
-      ...prevState, [fieldName]: value
-    }))
-  }
+    validationSchema: Yup.object({
+      email: Yup.string()
+        .email("Invalid email format")
+        .matches(
+          /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+          "Invalid email format"
+        )
+        .required("Your email is required"),
+      firstName: Yup.string()
+        .min(2, 'First name must be at least 2 characters')
+        .required('Your first name is required'),
+      lastName: Yup.string()
+        .min(2, 'Last name must be at least 2 characters')
+        .required('Your last name is required'),
+    }),
+
+    onSubmit: async(values) => {
+
+     console.log(values);
+     
+    },
+  });
 
   return (
     <div className='bg-[#EAEAED] h-[88vh] p-[40px]'>
@@ -44,39 +66,45 @@ const Profile = () => {
         <div className='flex w-full sm:w-[350px] flex-col items-start gap-[8px]'>
           <div className='py-3 w-full'>
             <InputField
-              value={profileData?.firstName}
+              value={formik.values.firstName}
               placeholder='Enter your first name here'
               required={false}
               type='text'
+              name="firstName"
               className='text-xs'
               label='First Name'
-              onChange={(value) => handleChange('firstName', value)}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               {...inputFieldStylingProps}
             />
           </div>
 
           <div className='py-3 w-full'>
             <InputField
-              value={profileData?.lastName}
+              value={formik.values.lastName}
               placeholder='Enter your last name here'
               required={false}
               type='text'
+              name="lastName"
               className='text-xs'
               label='Last Name'
-              onChange={(value) => handleChange('lastName', value)}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               {...inputFieldStylingProps}
             />
           </div>
 
           <div className='py-3 w-full'>
             <InputField
-              value={profileData?.email}
+              value={formik.values.email}
               placeholder='Enter your email here'
               required={false}
               type='text'
+              name="email"
               className='text-xs'
               label='Email'
-              onChange={(value) => handleChange('email', value)}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               {...inputFieldStylingProps}
             />
           </div>

@@ -5,6 +5,9 @@ import Arrow from '../../../public/arrow.svg'
 import InputField from '@/app/components/InputField'
 import { useState } from 'react'
 import Button from '@/app/components/Button' 
+import { useFormik } from "formik";
+import * as Yup from "yup";
+
 const inputFieldStylingProps = {
   container: {
     className: 'flex flex-col space w-full'
@@ -18,7 +21,34 @@ const inputFieldStylingProps = {
 }
 
 export default function ResetPassword() {
-  const [password, setPassword] = useState('')
+  const formik = useFormik({
+    initialValues: {
+      newPassword: "",
+      confirmPassword: "",
+    },
+
+    validationSchema: Yup.object({
+      newPassword: Yup.string()
+        .min(8, 'Password must be at least 8 characters')
+        .required('New Password is required')
+        .matches(
+          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
+          'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character'
+        ),
+      confirmPassword: Yup.string()
+        .min(8, 'Password must be at least 8 characters')
+        .required('Confirm Password is required')
+        .matches(
+          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
+          'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character'
+        ),
+    }),
+
+    onSubmit: (values) => {
+      console.log(values);
+      
+    },
+  });
   
   return (
     <main className='bg-white rounded-[24px] shadow-lg min-h-1/2 md:w-[50%] lg:w-1/3 w-[90%] px-16 py-4'>
@@ -31,25 +61,29 @@ export default function ResetPassword() {
         <p className='text-base py-3 text-[#475569] text-center'>Do not disclose your new password to anyone to avoid a cyber attacks.</p>
         <div className='py-2'>
           <InputField
-              value={password}
+              value={formik.values.newPassword}
               placeholder='Enter your new password here'
               required={false}
               type='text'
+              name="newPassword"
               className='text-xs'
               label='New Password'
-              onChange={setPassword}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               {...inputFieldStylingProps}
-            />
+          />
         </div>
         <div className='py-3'>
           <InputField
-            value={password}
+            value={formik.values.confirmPassword}
             placeholder='Confirm your new password here'
             required={false}
             type='text'
+            name="confirmPassword"
             className='text-xs'
             label='Confirm Password'
-            onChange={setPassword}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             {...inputFieldStylingProps}
           />
         </div>

@@ -7,6 +7,9 @@ import Button from "@/app/components/ContactBtn"
 import Faq from "@/app/components/Faq";
 import Footer from "@/app/components/Footer";
 import InputField from "@/app/components/InputField";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+
 const inputFieldStylingProps = {
   container: {
     className: 'flex flex-col mb-4'
@@ -23,6 +26,34 @@ export default function Contact() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      email: "",
+      message: "",
+    },
+
+    validationSchema: Yup.object({
+      name: Yup.string()
+        .required("Your name is required"),
+      email: Yup.string()
+        .email("Invalid email format")
+        .matches(
+          /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+          "Invalid email format"
+        )
+        .required("Your email is required"),
+      message: Yup.string()
+        .required('Your message is required')
+    }),
+
+    onSubmit: (values) => {
+      console.log(values);
+      
+    },
+  });
+
   return (
     <main className='bg-[#EDEFF3] min-h-screen text-[#475569] pt-16 '>
       <section className="lg:flex lg:mx-32 xl:mx-48 mt-16" >
@@ -32,23 +63,27 @@ export default function Contact() {
             <p className="py-3 ">You can reach us anytime via contact@fikia.io </p>
             <form className="w-full">
               <InputField
-                value={name}
+                value={formik.values.name}
                 placeholder='Your name'
                 required={true}
                 type='text'
+                name="name"
                 className='text-xs'
                 label='Name'
-                onChange={setName}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 {...inputFieldStylingProps}
               />
               <InputField
-                value={email}
+                value={formik.values.email}
                 placeholder='Your email'
                 required={true}
                 type='email'
+                name="email"
                 className='text-xs'
                 label='Email'
-                onChange={setEmail}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
                 {...inputFieldStylingProps}
               />
               <TextArea

@@ -5,6 +5,9 @@ import Button from "./Button";
 import InputField from "./InputField";
 import { useState } from "react";
 import apiQuery from '../api'
+import { useFormik } from "formik";
+import * as Yup from "yup";
+
 interface EmailRequestProps {
   value?: string
   // onClick?: () => void
@@ -18,6 +21,28 @@ export default function EmailRequest({ value }: EmailRequestProps) {
   const handleEmail = (email: string) => {
     setEmail(email)
   }
+
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+
+    validationSchema: Yup.object({
+      email: Yup.string()
+        .email("Invalid email format")
+        .matches(
+          /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+          "Invalid email format"
+        )
+        .required("Your email is required"),
+    }),
+
+    onSubmit: (values) => {
+      console.log(values);
+      
+    },
+  });
 
   const handleWaitlist = async () => {
     if (validator.isEmail(email)) {
@@ -59,13 +84,15 @@ export default function EmailRequest({ value }: EmailRequestProps) {
       <div className='relative  flex items-center  xl:w-3/4  '>
         <div className=' w-full'>
           <InputField
-            value={email}
+            value={formik.values.email}
             placeholder='Your email'
             required={false}
             type='text'
+            name="email"
             className='text-sm text-[#475569] '
             label=''
-            onChange={handleEmail}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             {...inputFieldStylingProps}
           />
         </div>

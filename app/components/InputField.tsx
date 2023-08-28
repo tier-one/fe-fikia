@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image"
 
 interface InputProps{
@@ -5,8 +7,10 @@ interface InputProps{
   label?: string
   placeholder?: string
   type?: string
+  name?: string
   icon?: string
-  onChange?: (value: string)=> void
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   className?: string
   required?: boolean
   container?: {
@@ -26,8 +30,10 @@ export default function InputField({
     placeholder, 
     required, 
     type,
+    name,
     icon, 
-    onChange, 
+    onChange,
+    onBlur,
     className,
     ...props 
   }: InputProps) {
@@ -47,9 +53,11 @@ export default function InputField({
       </div>
       <input
         type={type}
+        name={name}
         value={value}
         placeholder={placeholder}
-        onChange={handleChange}
+        onChange={onChange}
+        onBlur={onBlur}
         className={props.input?.className}
         {...props}
       />
