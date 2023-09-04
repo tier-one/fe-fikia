@@ -92,3 +92,23 @@ export const formikValidationSchema2 = Yup.object({
 
 });
 
+export const formikRegistrationValidationSchema = Yup.object({
+  email: Yup.string()
+    .email("Invalid email format")
+    .matches(
+      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+      "Invalid email format"
+    )
+    .required("Your email is required"),
+  password: Yup.string()
+    .min(8, "Password must be at least 8 characters")
+    .required("Your password is required")
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
+      "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character"
+    ),
+  confirmPassword: Yup.string()
+    .required('Confirm Password is required')
+    .oneOf([Yup.ref('password')], 'Passwords must match'),
+})
+
