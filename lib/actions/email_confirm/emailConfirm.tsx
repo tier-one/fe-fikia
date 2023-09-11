@@ -1,7 +1,20 @@
 import API from "@/utils/apiCall";
 import { toast } from 'react-toastify';
 
-const emailConfirm = async (token: string | null | undefined) => {
+type SetErrorFunction = (error: string | any) => void;
+
+type SetLoadingFunction = (data: boolean) => void;
+
+interface CustomError extends Error {
+    response?: {
+      data: {
+        error: string
+      };
+    };
+}
+
+const emailConfirm = async (token: string | null | undefined, setError: SetErrorFunction, setLoading: SetLoadingFunction) => {
+    setLoading(true);
     const data = {
         hash: token,
     }
@@ -18,10 +31,13 @@ const emailConfirm = async (token: string | null | undefined) => {
             progress: undefined,
             theme: 'colored',
         });
+        setLoading(false);
 
         return res.data;
     } catch (error) {
-        toast.error('An error occurred.', {
+        const customError = error as CustomError;
+
+        toast.error(customError.response?.data.error || 'Unexpected error! contact the owner', {
             position: 'top-right',
             autoClose: 6000,
             hideProgressBar: false,
@@ -31,8 +47,8 @@ const emailConfirm = async (token: string | null | undefined) => {
             progress: undefined,
             theme: 'colored',
         });
-
-        throw error;
+        setError(customError.response?.data.error || 'Unexpected error! contact the owner');
+        setLoading(false);
     }
 }
 

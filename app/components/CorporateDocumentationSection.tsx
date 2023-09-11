@@ -3,6 +3,7 @@ import React, { ChangeEvent, useState } from 'react'
 import Button from './Button';
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useRouter } from 'next/navigation';
 
 type Props = {
   handleContinue: () => void;
@@ -11,6 +12,12 @@ type Props = {
 };
 
 const CorporateDocumentationSection = ({ handleContinue, handleBack, visible }: Props) => {
+  const router = useRouter();
+  
+  const handleCancel = () => {
+    router.push('/profile')
+  }
+
     const formik = useFormik({
       initialValues: {
         image: "",
@@ -118,6 +125,8 @@ const CorporateDocumentationSection = ({ handleContinue, handleBack, visible }: 
     
               <div className="flex flex-wrap items-start gap-[16px]">
                 <Button
+                  onClick={handleCancel}
+                  isDisabled={true}
                   styling="rounded-lg cursor-pointer bg-slate-100 text-sm font-medium w-24 h-12 overflow-hidden shrink-0 flex flex-row py-2 px-4 box-border items-center justify-center"
                   value="Cancel"
                 />

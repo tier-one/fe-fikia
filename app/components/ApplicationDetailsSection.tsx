@@ -7,6 +7,7 @@ import Button from "./Button";
 import InputField from "./InputField";
 import { useFormik } from "formik";
 import {formikValidationSchema} from "./FormikValidationSchema";
+import { useRouter } from "next/navigation";
 
 const inputFieldStylingProps = {
   container: {
@@ -34,6 +35,11 @@ const ApplicationDetailsSection = ({
   handleLastBack,
   visible,
 }: Props) => {
+  const router = useRouter();
+  
+  const handleCancel = () => {
+    router.push('/profile')
+  }
 
   const formik = useFormik({
     initialValues: {
@@ -331,6 +337,8 @@ const ApplicationDetailsSection = ({
 
           <div className="flex flex-wrap items-start gap-[16px]">
             <Button
+              onClick={handleCancel}
+              isDisabled={true}
               styling="rounded-lg cursor-pointer text-sm bg-slate-100 font-medium w-24 h-12 overflow-hidden shrink-0 flex flex-row py-2 px-4 box-border items-center justify-center"
               value="Cancel"
             />

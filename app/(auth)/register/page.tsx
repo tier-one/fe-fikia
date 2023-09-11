@@ -53,10 +53,6 @@ export default function Login() {
 
       setIsLoading(false);
       
-
-      if (results.message && results.status === 201) {
-        router.push("/application");
-      }
     },
   });
 
