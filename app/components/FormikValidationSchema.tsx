@@ -20,7 +20,7 @@ export const formikValidationSchema = Yup.object({
     )
     .required("Phone is required"),
   ID_number: Yup.string()
-    .matches(/^\d{6,10}$/, "Invalid ID Number format")
+    .matches(/^[a-zA-Z\d]{6,20}$/, "Invalid ID Number format")
     .required("ID Number is required"),
 
 
