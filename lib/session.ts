@@ -5,6 +5,9 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import emailLogin from "./actions/email_login/emailLogin";
 import googleLogin from "./actions/google_login/googleLogin";
 
+interface ExtendedUser extends AdapterUser {
+  dbData: any;
+}
 
 export const authOptions: NextAuthOptions = {
     providers: [
@@ -48,9 +51,11 @@ export const authOptions: NextAuthOptions = {
       async signIn({ account, user, credentials }: { user: AdapterUser | User, account: Account | null, credentials?: Record<string, any> | undefined, }) {
         if (account?.provider === "google") {
 
-          const googleUser = await googleLogin(user?.name as string, user?.email as string);
+          const dbUser = await googleLogin(user?.name as string, user?.email as string);
 
-          return googleUser;
+          (user as ExtendedUser).dbData = dbUser;
+  
+          return { user };
 
       
         } else if (account?.provider === "credentials") {

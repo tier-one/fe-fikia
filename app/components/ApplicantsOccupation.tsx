@@ -4,21 +4,21 @@ import RadioInput from './RadioInput'
 
 type Props = {
   formik: FormikProps<{
-    first_name: string;
-    sur_name: string;
-    last_name: string;
-    date_of_birth: string;
-    phone: string;
-    ID_number: string;
+    firstName: string;
+    middleName: string;
+    lastName: string;
+    dateOfBirth: string;
+    phoneNumber: string;
+    governmentId: string;
 
-    bank_name: string;
-    branch_name: string;
-    account_No: string;
-    swift_code: string;
+    name: string;
+    branchName: string;
+    accountNumber: string;
+    swiftCode: string;
 
-    applicants_resident: string;
-    applicants_occupation: string;
-    applicants_fund: string;
+    residence: string;
+    occupation: string;
+    sourceOfFunds: string;
   }>;
 }
 
@@ -34,61 +34,61 @@ const ApplicantsOccupation = ({ formik }: Props) => {
             <RadioInput
               id="Agriculture"
               value="Agriculture"
-              name="applicants_occupation"
+              name="occupation"
               label="Agriculture"
-              checked={formik.values.applicants_occupation === "Agriculture"}
+              checked={formik.values.occupation === "Agriculture"}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
             />
             <RadioInput
               id="Employed"
               value="Employed"
-              name="applicants_occupation"
+              name="occupation"
               label="Employed"
-              checked={formik.values.applicants_occupation === "Employed"}
+              checked={formik.values.occupation === "Employed"}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
             />
             <RadioInput
               id="Business"
               value="Business"
-              name="applicants_occupation"
+              name="occupation"
               label="Business"
-              checked={formik.values.applicants_occupation === "Business"}
+              checked={formik.values.occupation === "Business"}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
             />
             <RadioInput
               id="Professional"
               value="Professional"
-              name="applicants_occupation"
+              name="occupation"
               label="Professional"
-              checked={formik.values.applicants_occupation === "Professional"}
+              checked={formik.values.occupation === "Professional"}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
             />
             <RadioInput
               id="Student"
               value="Student"
-              name="applicants_occupation"
+              name="occupation"
               label="Student"
-              checked={formik.values.applicants_occupation === "Student"}
+              checked={formik.values.occupation === "Student"}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
             />
             <RadioInput
               id="Other"
               value="Other"
-              name="applicants_occupation"
+              name="occupation"
               label="Other"
-              checked={formik.values.applicants_occupation === "Other"}
+              checked={formik.values.occupation === "Other"}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
             />
           </div>
-          {formik.touched.applicants_occupation && formik.errors.applicants_occupation ? (
+          {formik.touched.occupation && formik.errors.occupation ? (
             <p className="flex px-[3px] text-[10px] text-center text-red-600 self-stretch">
-              {formik.errors.applicants_occupation}
+              {formik.errors.occupation}
             </p>
           ) : null}
     </div>

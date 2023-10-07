@@ -2,11 +2,13 @@
 
 import Image from "next/image";
 import React, { ChangeEvent, useState } from "react";
+import { useSession } from "next-auth/react";
 import Button from "./Button";
 import SuccessfulModel from "./SuccessfulModel";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useRouter } from "next/navigation";
+import { updateProfile } from "@/lib/actions/update_profile/updateProfile";
 
 type Props = {
   handleContinue: () => void;
@@ -15,8 +17,18 @@ type Props = {
 };
 
 const DeclarationSection = ({ handleContinue, handleBack, visible }: Props) => {
+  const {data: session} = useSession();
+  const [isLoading, setIsLoading] = useState(false);
   const [isSuccessfulModalOpen, setIsSuccessfulModalOpen] = useState(false);
   const router = useRouter();
+
+  const token = session?.user?.token;
+
+  const userId = session?.user?.id;
+  
+
+
+
   const handleCancel = () => {
     router.push('/profile')
   }
@@ -30,18 +42,34 @@ const DeclarationSection = ({ handleContinue, handleBack, visible }: Props) => {
 
   const formik = useFormik({
     initialValues: {
-      image1: "",
-      image2: "",
+      firstApplicantSignatureImage: "",
+      nextOfKeenImage: "",
     },
 
     validationSchema: Yup.object({
-      image1: Yup.string()
+      firstApplicantSignatureImage: Yup.string()
           .required("First applicant Signature is required"),
-      image2: Yup.string()
+      nextOfKeenImage: Yup.string()
           .required("Next of kin is required"),
     }),
 
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
+      setIsLoading(true);
+      const storedData = localStorage.getItem('profileDetails');
+
+      if (storedData) {
+        let detailsArray = JSON.parse(storedData);
+
+        detailsArray = {...detailsArray, ...values}
+
+        localStorage.setItem('profileDetails', JSON.stringify(detailsArray));
+
+        await updateProfile(detailsArray, userId, token);
+
+        localStorage.removeItem('profileDetails')
+      }
+      setIsLoading(false);
+
       openSuccessfulModal();
     },
   });
@@ -94,7 +122,7 @@ const DeclarationSection = ({ handleContinue, handleBack, visible }: Props) => {
               htmlFor="file"
               className="flex justify-center items-center z-10 text-center w-full lg:min-h-[230px] min-h-[200px] p-10 text-[#64748A] border-2 border-[#CAD4E0] border-dashed"
             >
-              {!formik.values.image1 && (
+              {!formik.values.firstApplicantSignatureImage && (
                 <span className="flex flex-col justify-center items-center gap-[5px] w-full">
                   <Image
                     src="/file_upload.svg"
@@ -106,24 +134,24 @@ const DeclarationSection = ({ handleContinue, handleBack, visible }: Props) => {
                 </span>
               )}
             </label>
-            {formik.touched.image1 && formik.errors.image1 ? (
+            {formik.touched.firstApplicantSignatureImage && formik.errors.firstApplicantSignatureImage ? (
               <p className="flex px-[3px] text-[10px] text-center text-red-600 self-stretch">
-                {formik.errors.image1}
+                {formik.errors.firstApplicantSignatureImage}
               </p>
             ) : null}
             <input
-              id="image1"
+              id="firstApplicantSignatureImage"
               type="file"
-              name="image1"
+              name="firstApplicantSignatureImage"
               accept="image/*"
               required={true}
               className="absolute z-30 w-full opacity-0 h-full cursor-pointer"
-              onChange={(e) => handleChangeImage(e, "image1")}
+              onChange={(e) => handleChangeImage(e, "firstApplicantSignatureImage")}
               onBlur={formik.handleBlur}
             />
-            {formik.values.image1 && (
+            {formik.values.firstApplicantSignatureImage && (
               <Image
-                src={formik.values.image1}
+                src={formik.values.firstApplicantSignatureImage}
                 className="sm:p-10 object-contain z-20 absolute top-[6px]"
                 alt="file"
                 width={400}
@@ -141,7 +169,7 @@ const DeclarationSection = ({ handleContinue, handleBack, visible }: Props) => {
               htmlFor="file"
               className="flex justify-center items-center z-10 text-center w-full lg:min-h-[230px] min-h-[200px] p-10 text-[#64748A] border-2 border-[#CAD4E0] border-dashed"
             >
-              {!formik.values.image2 && (
+              {!formik.values.nextOfKeenImage && (
                 <span className="flex flex-col justify-center items-center gap-[5px] w-full">
                   <Image
                     src="/file_upload.svg"
@@ -153,24 +181,24 @@ const DeclarationSection = ({ handleContinue, handleBack, visible }: Props) => {
                 </span>
               )}
             </label>
-            {formik.touched.image2 && formik.errors.image2 ? (
+            {formik.touched.nextOfKeenImage && formik.errors.nextOfKeenImage ? (
               <p className="flex px-[3px] text-[10px] text-center text-red-600 self-stretch">
-                {formik.errors.image2}
+                {formik.errors.nextOfKeenImage}
               </p>
             ) : null}
             <input
-              id="image2"
+              id="nextOfKeenImage"
               type="file"
-              name="image2"
+              name="nextOfKeenImage"
               accept="image/*"
               required={true}
               className="absolute z-30 w-full opacity-0 h-full cursor-pointer"
-              onChange={(e) => handleChangeImage(e, "image2")}
+              onChange={(e) => handleChangeImage(e, "nextOfKeenImage")}
               onBlur={formik.handleBlur}
             />
-            {formik.values.image2 && (
+            {formik.values.nextOfKeenImage && (
               <Image
-                src={formik.values.image2}
+                src={formik.values.nextOfKeenImage}
                 className="sm:p-10 object-contain z-20 absolute top-[6px]"
                 alt="file"
                 width={400}
@@ -202,6 +230,7 @@ const DeclarationSection = ({ handleContinue, handleBack, visible }: Props) => {
               styling="rounded-lg cursor-pointer bg-[#002674] text-sm font-medium w-24 h-12 overflow-hidden shrink-0 flex flex-row py-2 px-4 box-border items-center justify-center text-white"
               value="Finish"
               isDisabled={true}
+              isLoading={isLoading}
             />
           </div>
         </div>
