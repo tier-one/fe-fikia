@@ -7,10 +7,13 @@ const emailLogin = async (email: string | null | undefined, password: string | n
     }
     try {
         const res = await API.post(`/api/v1/auth/email/login`, data);
+        console.log(res, 'This is it');
         
         
         return res.data;
     } catch (error) {
+        console.log(error);
+        
         throw error;
     }
 }

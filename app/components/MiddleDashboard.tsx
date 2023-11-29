@@ -1,10 +1,47 @@
+'use client';
+
+import { recommandedFunds } from '@/constants';
+import fetchFunds from '@/lib/actions/get_fund/fetchFunds';
+import { useSession } from 'next-auth/react';
 import Image from 'next/image'
-import React from 'react'
+import { useRouter } from 'next/navigation';
+import React, { useEffect, useState } from 'react'
 import AreaChart from './AreaChart';
 import DasboardCard from './DashboardCard'
 import DoughnutPieChart from "./DoughnutPieChart";
+import FundCard from './FundCard';
+
 
 const MiddleDashboard = () => {
+  const { data: session } = useSession();
+  const [recomFunds, setRecomFunds] = useState([]);
+  const router = useRouter();
+
+  console.log(session?.user?.token);
+  
+
+  const token = session?.user?.token;
+
+  useEffect(() => {
+    fetchAllFunds();
+  }, [token])
+
+  const fetchAllFunds = async () => {
+    if (token) {
+      console.log(token, 'this the token');
+      const response = await fetchFunds(token)
+
+      console.log(response, 'Here we have all funds');
+    
+      setRecomFunds(response)
+    }
+  }
+
+  
+
+  const handleShowAll = () => {
+    router.push('/fund');
+  }
   return (
     <div className='flex flex-col gap-[24px]'>
         <div className='flex p-[16px] flex-col items-center gap-[24px] self-stretch rounded-[16px] shadow-sm w-full bg-[#FFF]'>
@@ -53,31 +90,25 @@ const MiddleDashboard = () => {
 
         </div>
 
-        <DasboardCard 
-          upperTitle='Consumption' 
-          title='Unguka fund - Growth'
-          firstTitle='INCEPTION DATE'
-          secondTitle='NET ASSETS'
-          thirdTitle='YTD RETURN'
-          firstValue='Aug 5, 2005'
-          secondValue='$10,000'
-          thirdValue='+9.8 %'
-          textGray='text-[#475569]'
-        />
+        <div className='flex flex-col items-end gap-[16px] self-stretch'>
+            <div className='flex justify-between items-start self-stretch'>
+                <div className='flex items-center gap-[8px]'>
+                    <h1 className='text-[#334155] text-[16px] font-[500] leading-normal'>Recommended funds</h1>
+                </div>
 
-        <DasboardCard 
-          upperTitle='Consumption' 
-          title='Unguka fund - Growth'
-          firstTitle='Fund size'
-          secondTitle='Return (P.A)'
-          thirdTitle='Risk'
-          firstValue='$10,000'
-          secondValue='+9.8 %'
-          thirdValue='Low'
-          textGreen='text-[#22C45E]'
-        />
+                <div onClick={handleShowAll}  className='flex px-[8px] py-[4px] items-center justify-center gap-[8px] cursor-pointer'>
+                    <h1 className='text-[#00B7FE] text-[14px] font-[500] leading-normal'>View all</h1>
+                </div>
+            </div>
+
+            <div className='flex w-full flex-wrap items-start gap-[16px] self-stretch'>
+                {recommandedFunds.map((fund) => (
+                    <FundCard fundDetails={fund} key={fund.id} containerStyle='flex h-auto  w-[363px] pt-[16px] flex-col items-start gap-[24px] rounded-[8px] bg-[#FFF]' />
+                ))}
+            </div>
+        </div>
     </div>
   )
 }
 
-export default MiddleDashboard
+export default MiddleDashboard;
