@@ -16,7 +16,7 @@ const ApexChart = () => {
   const chartData: ApexOptions = {
     chart: {
       type: "area",
-      height: 250,
+      height: 300,
       zoom: {
         enabled: false,
       },
@@ -41,7 +41,7 @@ const ApexChart = () => {
 
   return (
     <div className='w-full' id="chart">
-      <ReactApexChart options={chartData} series={series} type="area" className='w-full' />
+      <ReactApexChart options={chartData} series={series} type="area" className='w-full' height={300} />
     </div>
   );
 };

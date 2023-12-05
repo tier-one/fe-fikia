@@ -28,17 +28,35 @@ const MiddleDashboard = () => {
 
   const fetchAllFunds = async () => {
     if (token) {
-      console.log(token, 'this the token');
-      const response = await fetchFunds(token)
-
-      console.log(response, 'Here we have all funds');
+      const response = await fetchFunds(token);
     
-      setRecomFunds(response)
+      setRecomFunds(response.fund)
     }
   }
 
-  
+  const allFunds = recomFunds?.map((fund: { fund: { 
+    id: any;
+    createdAt: string;
+    FundLogo: string;
+    FundName: string;
+    FundSymbol: string;
+    FundGoal: string;
+    CustodianParcentage: string;
+    TrustPercentage: string;
+  }; }) => {
+    return {
+      "id": `${fund?.fund?.id}`,
+      "fundLogo": `${fund?.fund?.FundLogo}`,
+      "fundName": `${fund?.fund?.FundName}`,
+      "fundSymbol": `${fund?.fund?.FundSymbol}`,
+      "FundGoal": `${fund?.fund?.FundGoal}`,
+      "lunchedDate": `${fund?.fund?.createdAt?.split('T')[0]}`,
+      "CustodianParcentage": `${fund?.fund?.CustodianParcentage}%`,
+      "TrustPercentage": `${fund?.fund?.TrustPercentage}%`
+    }
+  });
 
+  
   const handleShowAll = () => {
     router.push('/fund');
   }
@@ -102,7 +120,7 @@ const MiddleDashboard = () => {
             </div>
 
             <div className='flex w-full flex-wrap items-start gap-[16px] self-stretch'>
-                {recommandedFunds.map((fund) => (
+                {allFunds?.map((fund: any) => (
                     <FundCard fundDetails={fund} key={fund.id} containerStyle='flex h-auto  w-[363px] pt-[16px] flex-col items-start gap-[24px] rounded-[8px] bg-[#FFF]' />
                 ))}
             </div>
