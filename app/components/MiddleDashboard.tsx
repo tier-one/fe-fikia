@@ -2,6 +2,7 @@
 
 import { recommandedFunds } from '@/constants';
 import fetchFunds from '@/lib/actions/get_fund/fetchFunds';
+import fetchPoltfolios from '@/lib/actions/get_portfolios/fetchPortfolio';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image'
 import { useRouter } from 'next/navigation';
@@ -15,30 +16,61 @@ import FundCard from './FundCard';
 const MiddleDashboard = () => {
   const { data: session } = useSession();
   const [recomFunds, setRecomFunds] = useState([]);
+  const [portfolios, setPortfolios] = useState(null);
+  const [isFetching, setIsFetching] = useState(false);
   const router = useRouter();
-
-  console.log(session?.user?.token);
   
 
   const token = session?.user?.token;
 
   useEffect(() => {
     fetchAllFunds();
+    fetchPortfolios();
   }, [token])
 
   const fetchAllFunds = async () => {
     if (token) {
-      console.log(token, 'this the token');
-      const response = await fetchFunds(token)
-
-      console.log(response, 'Here we have all funds');
+      const response = await fetchFunds(token);
     
-      setRecomFunds(response)
+      setRecomFunds(response.fund)
     }
   }
 
-  
+  const fetchPortfolios = async () => {
+    if (token) {
+      setIsFetching(true);
 
+      const response = await fetchPoltfolios(token);
+    
+      setPortfolios(response?.portfolioItems);
+
+      setIsFetching(false)
+    }
+  }
+
+  const allFunds = recomFunds?.map((fund: { fund: { 
+    id: any;
+    createdAt: string;
+    FundLogo: string;
+    FundName: string;
+    FundSymbol: string;
+    FundGoal: string;
+    CustodianParcentage: string;
+    TrustPercentage: string;
+  }; }) => {
+    return {
+      "id": `${fund?.fund?.id}`,
+      "fundLogo": `${fund?.fund?.FundLogo}`,
+      "fundName": `${fund?.fund?.FundName}`,
+      "fundSymbol": `${fund?.fund?.FundSymbol}`,
+      "FundGoal": `${fund?.fund?.FundGoal}`,
+      "lunchedDate": `${fund?.fund?.createdAt?.split('T')[0]}`,
+      "CustodianParcentage": `${fund?.fund?.CustodianParcentage}%`,
+      "TrustPercentage": `${fund?.fund?.TrustPercentage}%`
+    }
+  });
+
+  
   const handleShowAll = () => {
     router.push('/fund');
   }
@@ -79,12 +111,15 @@ const MiddleDashboard = () => {
             </div>
 
             <div className='flex flex-col xl:flex-row items-center gap-[14px] self-stretch'>
-                <div className='w-[80%] lg:w-[45%]'>
+                {/* <div className='w-[80%] lg:w-[45%]'>
                     <AreaChart />
-                </div>
+                </div> */}
                 <div className='w-[80%] lg:w-[45%]'>
                     <h1 className='text-[#334155] text-[24px] font-[500] leading-normal'>Your portfolio</h1>
-                    <DoughnutPieChart />
+                    <DoughnutPieChart 
+                      portfolios={portfolios}
+                      isFetching={isFetching}
+                    />
                 </div>
             </div>
 
@@ -102,7 +137,7 @@ const MiddleDashboard = () => {
             </div>
 
             <div className='flex w-full flex-wrap items-start gap-[16px] self-stretch'>
-                {recommandedFunds.map((fund) => (
+                {allFunds?.map((fund: any) => (
                     <FundCard fundDetails={fund} key={fund.id} containerStyle='flex h-auto  w-[363px] pt-[16px] flex-col items-start gap-[24px] rounded-[8px] bg-[#FFF]' />
                 ))}
             </div>

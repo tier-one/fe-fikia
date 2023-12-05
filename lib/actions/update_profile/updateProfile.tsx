@@ -70,8 +70,6 @@ export const updateProfile = async (form: ProjectForm, userId: string | undefine
             }
 
             const res = await API.patch(`/api/v1/users/${userId}`, data, { headers });
-
-            console.log(res.data, 'this this is the return after update');
         
         
             return res.data;

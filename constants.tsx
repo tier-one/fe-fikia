@@ -83,7 +83,7 @@ export const notifications = [
 export const allFunds = [
   {
       id: 1,
-      fundLogo: '',
+      fundLogo: 'https://img.freepik.com/free-vector/bird-colorful-logo-gradient-vector_343694-1365.jpg',
       fundName: 'Unguka fund',
       fundSymbol: 'UNGK',
       inception: '7.8',
@@ -93,7 +93,7 @@ export const allFunds = [
   },
   {
       id: 2,
-      fundLogo: '',
+      fundLogo: 'https://img.freepik.com/free-vector/bird-colorful-logo-gradient-vector_343694-1365.jpg',
       fundName: 'Vanguard Stock Market Index Fund',
       fundSymbol: 'VTSAX',
       inception: '320',
@@ -103,7 +103,7 @@ export const allFunds = [
   },
   {
       id: 3,
-      fundLogo: '',
+      fundLogo: 'https://img.freepik.com/free-vector/bird-colorful-logo-gradient-vector_343694-1365.jpg',
       fundName: 'Unguka fund',
       fundSymbol: 'UNGK',
       inception: '7.8',
@@ -113,7 +113,7 @@ export const allFunds = [
   },
   {
       id: 4,
-      fundLogo: '',
+      fundLogo: 'https://img.freepik.com/free-vector/bird-colorful-logo-gradient-vector_343694-1365.jpg',
       fundName: 'Vanguard Stock Market Index Fund',
       fundSymbol: 'VTSAX',
       inception: '320',
@@ -123,7 +123,7 @@ export const allFunds = [
   },
   {
       id: 5,
-      fundLogo: '',
+      fundLogo: 'https://img.freepik.com/free-vector/bird-colorful-logo-gradient-vector_343694-1365.jpg',
       fundName: 'Unguka fund',
       fundSymbol: 'UNGK',
       inception: '7.8',
@@ -133,7 +133,7 @@ export const allFunds = [
   },
   {
       id: 6,
-      fundLogo: '',
+      fundLogo: 'https://img.freepik.com/free-vector/bird-colorful-logo-gradient-vector_343694-1365.jpg',
       fundName: 'Vanguard Stock Market Index Fund',
       fundSymbol: 'VTSAX',
       inception: '320',
@@ -143,7 +143,7 @@ export const allFunds = [
   },
   {
       id: 7,
-      fundLogo: '',
+      fundLogo: 'https://img.freepik.com/free-vector/bird-colorful-logo-gradient-vector_343694-1365.jpg',
       fundName: 'Unguka fund',
       fundSymbol: 'UNGK',
       inception: '7.8',
@@ -153,7 +153,7 @@ export const allFunds = [
   },
   {
       id: 8,
-      fundLogo: '',
+      fundLogo: 'https://img.freepik.com/free-vector/bird-colorful-logo-gradient-vector_343694-1365.jpg',
       fundName: 'Vanguard Stock Market Index Fund',
       fundSymbol: 'VTSAX',
       inception: '320',
@@ -163,7 +163,7 @@ export const allFunds = [
   },
   {
       id: 9,
-      fundLogo: '',
+      fundLogo: 'https://img.freepik.com/free-vector/bird-colorful-logo-gradient-vector_343694-1365.jpg',
       fundName: 'Unguka fund',
       fundSymbol: 'UNGK',
       inception: '7.8',
@@ -171,4 +171,15 @@ export const allFunds = [
       price: '50',
       avm: '20,000'
   },
+]
+
+export const variables = [
+  {
+      id: 1,
+      value: 'Unguka fund'
+  },
+  {
+      id: 2,
+      value: 'BRD fund'
+  }
 ]

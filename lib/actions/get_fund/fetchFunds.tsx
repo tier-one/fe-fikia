@@ -1,4 +1,13 @@
 import API from "@/utils/apiCall";
+import { toast } from 'react-toastify';
+
+interface CustomError extends Error {
+    response?: {
+      data: {
+        message: string;
+      };
+    };
+}
 
 const fetchFunds = async (token: string | undefined) => {
     const headers = {
@@ -6,15 +15,15 @@ const fetchFunds = async (token: string | undefined) => {
     };
 
     try {
-        const res = await API.get(`/api/v1/fund-manager/get-all-fund-setup`, { headers });
-        console.log(res, 'This all funds');
-        
+        const res = await API.get(`/api/v1/funds/get-all-funds`, { headers });
         
         return res.data;
     } catch (error) {
-        console.log(error);
+        const customError = error as CustomError;
         
-        return error;
+        return {
+            fund: []
+        };
     }
 }
 
