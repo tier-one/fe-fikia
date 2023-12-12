@@ -2,6 +2,7 @@
 
 import { recommandedFunds } from '@/constants';
 import fetchFunds from '@/lib/actions/get_fund/fetchFunds';
+import fetchPoltfolios from '@/lib/actions/get_portfolios/fetchPortfolio';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image'
 import { useRouter } from 'next/navigation';
@@ -15,15 +16,16 @@ import FundCard from './FundCard';
 const MiddleDashboard = () => {
   const { data: session } = useSession();
   const [recomFunds, setRecomFunds] = useState([]);
+  const [portfolios, setPortfolios] = useState(null);
+  const [isFetching, setIsFetching] = useState(false);
   const router = useRouter();
-
-  console.log(session?.user?.token);
   
 
   const token = session?.user?.token;
 
   useEffect(() => {
     fetchAllFunds();
+    fetchPortfolios();
   }, [token])
 
   const fetchAllFunds = async () => {
@@ -31,6 +33,18 @@ const MiddleDashboard = () => {
       const response = await fetchFunds(token);
     
       setRecomFunds(response.fund)
+    }
+  }
+
+  const fetchPortfolios = async () => {
+    if (token) {
+      setIsFetching(true);
+
+      const response = await fetchPoltfolios(token);
+    
+      setPortfolios(response?.portfolioItems);
+
+      setIsFetching(false)
     }
   }
 
@@ -97,12 +111,15 @@ const MiddleDashboard = () => {
             </div>
 
             <div className='flex flex-col xl:flex-row items-center gap-[14px] self-stretch'>
-                <div className='w-[80%] lg:w-[45%]'>
+                {/* <div className='w-[80%] lg:w-[45%]'>
                     <AreaChart />
-                </div>
+                </div> */}
                 <div className='w-[80%] lg:w-[45%]'>
                     <h1 className='text-[#334155] text-[24px] font-[500] leading-normal'>Your portfolio</h1>
-                    <DoughnutPieChart />
+                    <DoughnutPieChart 
+                      portfolios={portfolios}
+                      isFetching={isFetching}
+                    />
                 </div>
             </div>
 

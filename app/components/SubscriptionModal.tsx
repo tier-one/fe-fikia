@@ -9,6 +9,7 @@ import NewButton from './NewButton';
 import addSubscription from '@/lib/actions/subscription/addSubscription';
 import { useSession } from 'next-auth/react';
 import { useParams } from 'next/navigation';
+import fetchPoltfolios from '@/lib/actions/get_portfolios/fetchPortfolio';
 
 type Props = {
     title?: string;
@@ -50,9 +51,15 @@ const SubscriptionModal = ({ title, isPopupOpen, handleClose }: Props) => {
 
           await addSubscription(values, token, fundId)
 
+          fetchPoltfolios(token);
+
           setIsLoading(false)
 
           handleClose()
+
+          setTimeout(() => {
+            window.location.reload()
+          }, 3000)
         }
       });
 

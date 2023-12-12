@@ -203,9 +203,9 @@ const FundDetails = () => {
             </div>
           </div>
 
-          <div className='flex w-full p-[16px] flex-col items-start gap-[20px] rounded-[8px] bg-[#FFF] border border-solid border-slate-300'>
+          {/* <div className='flex w-full p-[16px] flex-col items-start gap-[20px] rounded-[8px] bg-[#FFF] border border-solid border-slate-300'>
               <ApexChart />
-          </div>
+          </div> */}
 
 
         </div>
