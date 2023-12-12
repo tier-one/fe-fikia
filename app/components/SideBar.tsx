@@ -2,16 +2,22 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams, usePathname } from 'next/navigation';
 import { variables } from '@/constants';
+import { useSession } from 'next-auth/react';
+import fetchPoltfolios from '@/lib/actions/get_portfolios/fetchPortfolio';
 
 const SideBar = () => {
+    const { data: session } = useSession();
   const pathname = usePathname();
   const [clickedIndex, setClickedIndex] = useState(-1);
   const [menu, setMenu] = useState(false);
   const [hamburgerOpen, setHamburgerOpen] = useState(false);
+  const [portfolios, setPortfolios] = useState([]);
   const fundId = useParams().id;
+
+  const token = session?.user?.token;
     
   function handleHamburgerBtn() {
     setHamburgerOpen(!hamburgerOpen)
@@ -21,6 +27,18 @@ const SideBar = () => {
     setClickedIndex(index);
     setHamburgerOpen(!hamburgerOpen)
   };
+
+  useEffect(() => {
+    fetchPortfolios();
+  }, [token])
+
+  const fetchPortfolios = async () => {
+    if (token) {
+      const response = await fetchPoltfolios(token);
+    
+      setPortfolios(response?.portfolioItems)
+    }
+  }
 
   return (
     <div className='bg-[#EAEAED]'>
@@ -61,10 +79,11 @@ const SideBar = () => {
                             </div>
                         </div>
                         <div className='flex flex-col items-start gap-[8px] self-stretch'>
-                            {variables.map((variable) => (
-                                <div onClick={() => handleClick(variable?.id)} key={variable?.id} className={`${clickedIndex === variable?.id && 'border-r-4 border-solid border-[#60A4F9]'} flex px-[16px] py-[12px] items-center gap-[15px] self-stretch cursor-pointer`}>
-                                    <span className='bg-[#60A4F9] p-[8px] w-[32px] h-[32px] flex text-white text-[16px] font-[700] leading-[20px] justify-center items-center rounded-[4px]'>{variable?.value?.charAt(0)}</span>
-                                    <Link href={`/portfolio/${variable?.id}`} className={`${clickedIndex === variable?.id ? 'text-[#00B7FE]' : 'text-[#334155]'} text-[14px] font-[500] leading-[20px]`}>{variable?.value}</Link>
+                            {portfolios?.map((portfolio: any, index) => (
+                                <div onClick={() => handleClick(index)} key={index} className={`${clickedIndex === index && 'border-r-4 border-solid border-[#60A4F9]'} flex px-[16px] py-[12px] items-center gap-[15px] self-stretch cursor-pointer`}>
+                                    <span className='bg-[#60A4F9] p-[8px] w-[32px] h-[32px] flex text-white text-[16px] font-[700] leading-[20px] justify-center items-center rounded-[4px]'>{portfolio?.fundName?.charAt(0)}</span>
+                                    <span className={`${clickedIndex === index ? 'text-[#00B7FE]' : 'text-[#334155]'} text-[14px] font-[500] leading-[20px]`}>{portfolio?.fundName}</span>
+                                    {/* <Link href={`/portfolio/${index}`} className={`${clickedIndex === index ? 'text-[#00B7FE]' : 'text-[#334155]'} text-[14px] font-[500] leading-[20px]`}>{portfolio?.fundName}</Link> */}
                                 </div>
                             ))}
                         </div>

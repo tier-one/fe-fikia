@@ -24,7 +24,7 @@ export default function Navbar() {
           </div>
           <div className='absolute right-10 md:right-0 flex gap-[24px] items-center justify-center'>
             <SearchBar />
-            <NotificationBell />
+            {/* <NotificationBell /> */}
             <ProfileButton />
           </div>
         </div>
