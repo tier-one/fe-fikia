@@ -19,10 +19,20 @@ type Fund = {
     FundSymbol: string;
     FundType: string;
     FundLogo: string;
-    AccoutDepositoryBankName: string;
-    AccountDepositoryAccountNumber: string;
-    CashAccountBankName: string;
-    CashAccountNumber: string;
+    CashAccounts: [
+      {
+        CashAccountBankName: string;
+        CashAccountNumber: string;
+        CashAccountCurrency: string;
+      },
+    ];
+    DepositoryAccounts: [
+      {
+        AccoutDepositoryBankName: string;
+        AccountDepositoryAccountNumber: string;
+        DespositoryAccountCurrency: string;
+      }
+    ];
     CustodianBankName: string;
     CustodianParcentage: string;
     TrustBankName: string;
@@ -40,6 +50,8 @@ const FundDetails = () => {
 
   const getSingleFund = async () => {
     const results = await fetchFundById(token, fundId);
+
+    console.log(results)
 
     setSingleFund(results.fund)
   }
@@ -144,29 +156,9 @@ const FundDetails = () => {
                   </span>
                 </div>
 
-                <div className='flex flex-col items-start gap-[8px]'>
-                  <h1 className='text-[#62708C] text-[14px] font-[400] leading-normal tracking-[0.5px]'>
-                    Depostory account
-                  </h1>
-
-                  <span className='text-[#62708C] text-[16px] font-[700] leading-normal tracking-[0.5px]'>
-                    {singleFund?.fund?.AccountDepositoryAccountNumber}
-                  </span>
-                </div>
-
               </div>
 
               <div className='flex flex-wrap items-start gap-[40px]'>
-
-              <div className='flex flex-col items-start gap-[8px]'>
-                  <h1 className='text-[#62708C] text-[14px] font-[400] leading-normal tracking-[0.5px]'>
-                    Account Name
-                  </h1>
-
-                  <span className='text-[#62708C] text-[16px] font-[600] leading-normal tracking-[0.5px]'>
-                    {singleFund?.fund?.AccoutDepositoryBankName}
-                  </span>
-                </div>
 
                 <div className='flex flex-col items-start gap-[8px]'>
                   <h1 className='text-[#62708C] text-[14px] font-[400] leading-normal tracking-[0.5px]'>
@@ -202,6 +194,20 @@ const FundDetails = () => {
 
             </div>
           </div>
+          
+          <div className='flex w-full p-[16px] flex-col items-end gap-[24px] rounded-[8px] border border-[#E5E9F0] bg-[#FFF]'>
+            <h1 className='w-full text-[#62708C] text-[20px] font-[600] leading-normal tracking-[0.5px]'>Cash Accounts</h1>
+
+            <div className='w-full h-[1px]  bg-[#F0F4F8]'></div>
+
+            {singleFund?.fund?.CashAccounts?.map((account) => (
+              <div key={account?.CashAccountNumber} className='w-full flex justify-between items-center'>
+                <h1 className='text-[#62708C] text-[14px] font-[400] leading-normal tracking-[0.5px]'>{account?.CashAccountBankName}</h1>
+                <h1 className='text-[#62708C] text-[14px] font-[400] leading-normal tracking-[0.5px]'>{account?.CashAccountNumber}</h1>
+                <h1 className='text-[#62708C] text-[14px] font-[400] leading-normal tracking-[0.5px]'>{account?.CashAccountCurrency}</h1>
+              </div>
+            ))}
+          </div>
 
           {/* <div className='flex w-full p-[16px] flex-col items-start gap-[20px] rounded-[8px] bg-[#FFF] border border-solid border-slate-300'>
               <ApexChart />
@@ -215,6 +221,7 @@ const FundDetails = () => {
         title='Subscription'
         isPopupOpen={isSubscriptionModalOpen}
         handleClose={closeSubscriptionModal}
+        cashCurrency={singleFund?.fund?.CashAccounts[0]?.CashAccountCurrency}
       />
     </div>
   )
