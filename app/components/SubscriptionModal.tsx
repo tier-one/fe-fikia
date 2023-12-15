@@ -74,7 +74,7 @@ const SubscriptionModal = ({ title, isPopupOpen, handleClose }: Props) => {
                     placeholder='Amount'
                     required={true}
                     type='number'
-                    dollarIcon={dollarIcon}
+                    // dollarIcon={dollarIcon}
                     name="amountInvested"
                     className='text-xs'
                     label='Amount'
