@@ -50,7 +50,8 @@ const FundDetails = () => {
 
   const getSingleFund = async () => {
     const results = await fetchFundById(token, fundId);
-    console.log(results, 'This is the single fund')
+
+    console.log(results)
 
     setSingleFund(results.fund)
   }
@@ -220,6 +221,7 @@ const FundDetails = () => {
         title='Subscription'
         isPopupOpen={isSubscriptionModalOpen}
         handleClose={closeSubscriptionModal}
+        cashCurrency={singleFund?.fund?.CashAccounts[0]?.CashAccountCurrency}
       />
     </div>
   )

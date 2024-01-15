@@ -16,6 +16,7 @@ type Props = {
     isBuyShares?: boolean;
     isPopupOpen: boolean;
     handleClose: () => void;
+    cashCurrency: any;
 }
 
 const inputFieldStylingProps = {
@@ -30,7 +31,7 @@ const inputFieldStylingProps = {
     },
 }
 
-const SubscriptionModal = ({ title, isPopupOpen, handleClose }: Props) => {
+const SubscriptionModal = ({ title, isPopupOpen, handleClose, cashCurrency }: Props) => {
     const [isLoading, setIsLoading] = useState(false);
     const {data: session} = useSession();
     const fundId = useParams().id;
@@ -69,19 +70,22 @@ const SubscriptionModal = ({ title, isPopupOpen, handleClose }: Props) => {
             <p className="text-[#475569] text-[18px] font-[600]">{title}</p>
 
             <div className="w-full h-[100px] flex flex-col justify-start items-center">
-                <InputField
-                    value={formik.values.amountInvested}
-                    placeholder='Amount'
-                    required={true}
-                    type='number'
-                    // dollarIcon={dollarIcon}
-                    name="amountInvested"
-                    className='text-xs'
-                    label='Amount'
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    {...inputFieldStylingProps}
-                />
+                <div className='relative flex w-full'>
+                  <InputField
+                      value={formik.values.amountInvested}
+                      placeholder='Amount'
+                      required={true}
+                      type='number'
+                      // dollarIcon={dollarIcon}
+                      name="amountInvested"
+                      className='text-xs'
+                      label='Amount'
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      {...inputFieldStylingProps}
+                  />
+                  <h1 className='absolute bg-white top-[40px] right-3'>{cashCurrency}</h1>
+                </div>
                 {formik.touched.amountInvested && formik.errors.amountInvested ? (
                     <p className="flex px-[3px] text-[10px] text-center text-red-600 self-stretch">
                         {formik.errors.amountInvested}
